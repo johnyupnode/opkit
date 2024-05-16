@@ -1,14 +1,14 @@
-# Use the official Ubuntu image as a base
-FROM ubuntu:22.04
+# Use the official Alpine image as a base
+FROM alpine:latest
 
 # Set environment variables for Go
-ENV GO_VERSION=1.21.10
+ENV GO_VERSION=1.22.0
 ENV PATH=$PATH:/usr/local/go/bin
 
 # Install dependencies
-RUN apt-get update && \
-    apt-get install -y curl wget jq git && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add --no-cache curl wget jq git build-base bash && \
+    rm -rf /var/cache/apk/*
 
 # Install Go
 RUN wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
