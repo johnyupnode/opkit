@@ -20,12 +20,47 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				DomainList: []types.Domain{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				DomainCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated domain",
+			genState: &types.GenesisState{
+				DomainList: []types.Domain{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid domain count",
+			genState: &types.GenesisState{
+				DomainList: []types.Domain{
+					{
+						Id: 1,
+					},
+				},
+				DomainCount: 0,
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	}

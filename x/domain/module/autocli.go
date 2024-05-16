@@ -17,6 +17,17 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod: "DomainAll",
+					Use:       "list-domain",
+					Short:     "List all domain",
+				},
+				{
+					RpcMethod:      "Domain",
+					Use:            "show-domain [id]",
+					Short:          "Shows a domain by id",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -27,6 +38,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
+				},
+				{
+					RpcMethod:      "CreateDomain",
+					Use:            "create-domain [domain] [owner] [timestamp] [txhash]",
+					Short:          "Create domain",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}, {ProtoField: "owner"}, {ProtoField: "timestamp"}, {ProtoField: "txhash"}},
+				},
+				{
+					RpcMethod:      "UpdateDomain",
+					Use:            "update-domain [id] [domain] [owner] [timestamp] [txhash]",
+					Short:          "Update domain",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "domain"}, {ProtoField: "owner"}, {ProtoField: "timestamp"}, {ProtoField: "txhash"}},
+				},
+				{
+					RpcMethod:      "DeleteDomain",
+					Use:            "delete-domain [id]",
+					Short:          "Delete domain",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

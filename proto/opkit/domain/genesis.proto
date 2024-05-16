@@ -1,17 +1,20 @@
 syntax = "proto3";
+
 package opkit.domain;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "opkit/domain/params.proto";
+import "opkit/domain/domain.proto";
 
 option go_package = "opkit/x/domain/types";
 
 // GenesisState defines the domain module's genesis state.
 message GenesisState {
+  
   // params defines all the parameters of the module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+           Params params      = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Domain domainList  = 2 [(gogoproto.nullable) = false] ;
+           uint64 domainCount = 3;
 }
+

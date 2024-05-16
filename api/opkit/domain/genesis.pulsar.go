@@ -14,15 +14,70 @@ import (
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_GenesisState_2_list)(nil)
+
+type _GenesisState_2_list struct {
+	list *[]*Domain
+}
+
+func (x *_GenesisState_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_GenesisState_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Domain)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_GenesisState_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Domain)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_GenesisState_2_list) AppendMutable() protoreflect.Value {
+	v := new(Domain)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_GenesisState_2_list) NewElement() protoreflect.Value {
+	v := new(Domain)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_GenesisState_2_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_GenesisState        protoreflect.MessageDescriptor
-	fd_GenesisState_params protoreflect.FieldDescriptor
+	md_GenesisState             protoreflect.MessageDescriptor
+	fd_GenesisState_params      protoreflect.FieldDescriptor
+	fd_GenesisState_domainList  protoreflect.FieldDescriptor
+	fd_GenesisState_domainCount protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_opkit_domain_genesis_proto_init()
 	md_GenesisState = File_opkit_domain_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
+	fd_GenesisState_domainList = md_GenesisState.Fields().ByName("domainList")
+	fd_GenesisState_domainCount = md_GenesisState.Fields().ByName("domainCount")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -96,6 +151,18 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
+	if len(x.DomainList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_2_list{list: &x.DomainList})
+		if !f(fd_GenesisState_domainList, value) {
+			return
+		}
+	}
+	if x.DomainCount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.DomainCount)
+		if !f(fd_GenesisState_domainCount, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -113,6 +180,10 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "opkit.domain.GenesisState.params":
 		return x.Params != nil
+	case "opkit.domain.GenesisState.domainList":
+		return len(x.DomainList) != 0
+	case "opkit.domain.GenesisState.domainCount":
+		return x.DomainCount != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -131,6 +202,10 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "opkit.domain.GenesisState.params":
 		x.Params = nil
+	case "opkit.domain.GenesisState.domainList":
+		x.DomainList = nil
+	case "opkit.domain.GenesisState.domainCount":
+		x.DomainCount = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -150,6 +225,15 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "opkit.domain.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "opkit.domain.GenesisState.domainList":
+		if len(x.DomainList) == 0 {
+			return protoreflect.ValueOfList(&_GenesisState_2_list{})
+		}
+		listValue := &_GenesisState_2_list{list: &x.DomainList}
+		return protoreflect.ValueOfList(listValue)
+	case "opkit.domain.GenesisState.domainCount":
+		value := x.DomainCount
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -172,6 +256,12 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "opkit.domain.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
+	case "opkit.domain.GenesisState.domainList":
+		lv := value.List()
+		clv := lv.(*_GenesisState_2_list)
+		x.DomainList = *clv.list
+	case "opkit.domain.GenesisState.domainCount":
+		x.DomainCount = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -197,6 +287,14 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
+	case "opkit.domain.GenesisState.domainList":
+		if x.DomainList == nil {
+			x.DomainList = []*Domain{}
+		}
+		value := &_GenesisState_2_list{list: &x.DomainList}
+		return protoreflect.ValueOfList(value)
+	case "opkit.domain.GenesisState.domainCount":
+		panic(fmt.Errorf("field domainCount of message opkit.domain.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -213,6 +311,11 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "opkit.domain.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "opkit.domain.GenesisState.domainList":
+		list := []*Domain{}
+		return protoreflect.ValueOfList(&_GenesisState_2_list{list: &list})
+	case "opkit.domain.GenesisState.domainCount":
+		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: opkit.domain.GenesisState"))
@@ -286,6 +389,15 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Params)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
+		if len(x.DomainList) > 0 {
+			for _, e := range x.DomainList {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.DomainCount != 0 {
+			n += 1 + runtime.Sov(uint64(x.DomainCount))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -314,6 +426,27 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.DomainCount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.DomainCount))
+			i--
+			dAtA[i] = 0x18
+		}
+		if len(x.DomainList) > 0 {
+			for iNdEx := len(x.DomainList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.DomainList[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+			}
 		}
 		if x.Params != nil {
 			encoded, err := options.Marshal(x.Params)
@@ -414,6 +547,59 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DomainList", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.DomainList = append(x.DomainList, &Domain{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.DomainList[len(x.DomainList)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 3:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DomainCount", wireType)
+				}
+				x.DomainCount = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.DomainCount |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -469,7 +655,9 @@ type GenesisState struct {
 	unknownFields protoimpl.UnknownFields
 
 	// params defines all the parameters of the module.
-	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	Params      *Params   `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	DomainList  []*Domain `protobuf:"bytes,2,rep,name=domainList,proto3" json:"domainList,omitempty"`
+	DomainCount uint64    `protobuf:"varint,3,opt,name=domainCount,proto3" json:"domainCount,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -499,6 +687,20 @@ func (x *GenesisState) GetParams() *Params {
 	return nil
 }
 
+func (x *GenesisState) GetDomainList() []*Domain {
+	if x != nil {
+		return x.DomainList
+	}
+	return nil
+}
+
+func (x *GenesisState) GetDomainCount() uint64 {
+	if x != nil {
+		return x.DomainCount
+	}
+	return 0
+}
+
 var File_opkit_domain_genesis_proto protoreflect.FileDescriptor
 
 var file_opkit_domain_genesis_proto_rawDesc = []byte{
@@ -508,22 +710,29 @@ var file_opkit_domain_genesis_proto_rawDesc = []byte{
 	0x6f, 0x2f, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67,
 	0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2f, 0x64, 0x6f, 0x6d, 0x61, 0x69,
-	0x6e, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x47,
-	0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x37,
-	0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14,
-	0x2e, 0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2e, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52,
-	0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x90, 0x01, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e,
-	0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2e, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x42, 0x0c, 0x47, 0x65,
-	0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1d, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f,
-	0x70, 0x6b, 0x69, 0x74, 0x2f, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0xa2, 0x02, 0x03, 0x4f, 0x44,
-	0x58, 0xaa, 0x02, 0x0c, 0x4f, 0x70, 0x6b, 0x69, 0x74, 0x2e, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e,
-	0xca, 0x02, 0x0c, 0x4f, 0x70, 0x6b, 0x69, 0x74, 0x5c, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0xe2,
-	0x02, 0x18, 0x4f, 0x70, 0x6b, 0x69, 0x74, 0x5c, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x5c, 0x47,
-	0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0d, 0x4f, 0x70, 0x6b,
-	0x69, 0x74, 0x3a, 0x3a, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6e, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x19,
+	0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2f, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x64, 0x6f, 0x6d,
+	0x61, 0x69, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa5, 0x01, 0x0a, 0x0c, 0x47, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x37, 0x0a, 0x06, 0x70, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6f, 0x70, 0x6b,
+	0x69, 0x74, 0x2e, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x12, 0x3a, 0x0a, 0x0a, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x4c, 0x69, 0x73,
+	0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2e,
+	0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x42, 0x04, 0xc8,
+	0xde, 0x1f, 0x00, 0x52, 0x0a, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12,
+	0x20, 0x0a, 0x0b, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x42, 0x90, 0x01, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2e,
+	0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1d, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64,
+	0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x70, 0x6b, 0x69, 0x74, 0x2f, 0x64,
+	0x6f, 0x6d, 0x61, 0x69, 0x6e, 0xa2, 0x02, 0x03, 0x4f, 0x44, 0x58, 0xaa, 0x02, 0x0c, 0x4f, 0x70,
+	0x6b, 0x69, 0x74, 0x2e, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0xca, 0x02, 0x0c, 0x4f, 0x70, 0x6b,
+	0x69, 0x74, 0x5c, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0xe2, 0x02, 0x18, 0x4f, 0x70, 0x6b, 0x69,
+	0x74, 0x5c, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61,
+	0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0d, 0x4f, 0x70, 0x6b, 0x69, 0x74, 0x3a, 0x3a, 0x44, 0x6f,
+	0x6d, 0x61, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -542,14 +751,16 @@ var file_opkit_domain_genesis_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_opkit_domain_genesis_proto_goTypes = []interface{}{
 	(*GenesisState)(nil), // 0: opkit.domain.GenesisState
 	(*Params)(nil),       // 1: opkit.domain.Params
+	(*Domain)(nil),       // 2: opkit.domain.Domain
 }
 var file_opkit_domain_genesis_proto_depIdxs = []int32{
 	1, // 0: opkit.domain.GenesisState.params:type_name -> opkit.domain.Params
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: opkit.domain.GenesisState.domainList:type_name -> opkit.domain.Domain
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_opkit_domain_genesis_proto_init() }
@@ -558,6 +769,7 @@ func file_opkit_domain_genesis_proto_init() {
 		return
 	}
 	file_opkit_domain_params_proto_init()
+	file_opkit_domain_domain_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_opkit_domain_genesis_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GenesisState); i {

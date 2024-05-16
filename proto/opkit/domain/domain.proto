@@ -1,0 +1,13 @@
+syntax = "proto3";
+package opkit.domain;
+
+option go_package = "opkit/x/domain/types";
+
+message Domain {
+  uint64 id = 1;
+  string domain = 2; 
+  string owner = 3; 
+  string timestamp = 4; 
+  string txhash = 5; 
+  string creator = 6;
+}

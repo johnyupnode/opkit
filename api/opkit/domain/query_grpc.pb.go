@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName = "/opkit.domain.Query/Params"
+	Query_Params_FullMethodName    = "/opkit.domain.Query/Params"
+	Query_Domain_FullMethodName    = "/opkit.domain.Query/Domain"
+	Query_DomainAll_FullMethodName = "/opkit.domain.Query/DomainAll"
 )
 
 // QueryClient is the client API for Query service.
@@ -28,6 +30,9 @@ const (
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a list of Domain items.
+	Domain(ctx context.Context, in *QueryGetDomainRequest, opts ...grpc.CallOption) (*QueryGetDomainResponse, error)
+	DomainAll(ctx context.Context, in *QueryAllDomainRequest, opts ...grpc.CallOption) (*QueryAllDomainResponse, error)
 }
 
 type queryClient struct {
@@ -47,12 +52,33 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) Domain(ctx context.Context, in *QueryGetDomainRequest, opts ...grpc.CallOption) (*QueryGetDomainResponse, error) {
+	out := new(QueryGetDomainResponse)
+	err := c.cc.Invoke(ctx, Query_Domain_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) DomainAll(ctx context.Context, in *QueryAllDomainRequest, opts ...grpc.CallOption) (*QueryAllDomainResponse, error) {
+	out := new(QueryAllDomainResponse)
+	err := c.cc.Invoke(ctx, Query_DomainAll_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a list of Domain items.
+	Domain(context.Context, *QueryGetDomainRequest) (*QueryGetDomainResponse, error)
+	DomainAll(context.Context, *QueryAllDomainRequest) (*QueryAllDomainResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -62,6 +88,12 @@ type UnimplementedQueryServer struct {
 
 func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (UnimplementedQueryServer) Domain(context.Context, *QueryGetDomainRequest) (*QueryGetDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Domain not implemented")
+}
+func (UnimplementedQueryServer) DomainAll(context.Context, *QueryAllDomainRequest) (*QueryAllDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DomainAll not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -94,6 +126,42 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_Domain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Domain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_Domain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Domain(ctx, req.(*QueryGetDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_DomainAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).DomainAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_DomainAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).DomainAll(ctx, req.(*QueryAllDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -104,6 +172,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "Domain",
+			Handler:    _Query_Domain_Handler,
+		},
+		{
+			MethodName: "DomainAll",
+			Handler:    _Query_DomainAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

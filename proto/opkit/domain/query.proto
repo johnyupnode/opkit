@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package opkit.domain;
 
 import "amino/amino.proto";
@@ -6,25 +7,54 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "opkit/domain/params.proto";
+import "opkit/domain/domain.proto";
 
 option go_package = "opkit/x/domain/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/opkit/domain/params";
+  
+  }
+  
+  // Queries a list of Domain items.
+  rpc Domain    (QueryGetDomainRequest) returns (QueryGetDomainResponse) {
+    option (google.api.http).get = "/opkit/domain/domain/{id}";
+  
+  }
+
+  rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
+    option (google.api.http).get = "/opkit/domain/domain{}";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
+
+message QueryGetDomainRequest {
+  uint64 id = 1;
+}
+
+message QueryGetDomainResponse {
+  Domain Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllDomainRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDomainResponse {
+  repeated Domain                                 Domain     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
