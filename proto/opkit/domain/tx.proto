@@ -14,24 +14,25 @@ option go_package = "opkit/x/domain/types";
 // Msg defines the Msg service.
 service Msg {
   option (cosmos.msg.v1.service) = true;
-  
+
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
-  rpc CreateDomain (MsgCreateDomain) returns (MsgCreateDomainResponse);
-  rpc UpdateDomain (MsgUpdateDomain) returns (MsgUpdateDomainResponse);
-  rpc DeleteDomain (MsgDeleteDomain) returns (MsgDeleteDomainResponse);
+  rpc UpdateParams     (MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  rpc CreateDomain     (MsgCreateDomain) returns (MsgCreateDomainResponse);
+  rpc UpdateDomain     (MsgUpdateDomain) returns (MsgUpdateDomainResponse);
+  rpc DeleteDomain     (MsgDeleteDomain) returns (MsgDeleteDomainResponse);
+  rpc SetPrimaryDomain (MsgSetPrimaryDomain) returns (MsgSetPrimaryDomainResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
-  option (cosmos.msg.v1.signer) =                      "authority";
+  option (cosmos.msg.v1.signer) = "authority";
   option           (amino.name) = "opkit/x/domain/MsgUpdateParams";
-  
+
   // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  
+
   // params defines the module parameters to update.
-  
+
   // NOTE: All parameters must be supplied.
   Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
@@ -42,11 +43,11 @@ message MsgUpdateParamsResponse {}
 
 message MsgCreateDomain {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator   = 1;
-  string domain    = 2;
-  string owner     = 3;
+  string creator = 1;
+  string domain = 2;
+  string owner = 3;
   string timestamp = 4;
-  string txhash    = 5;
+  string txhash = 5;
 }
 
 message MsgCreateDomainResponse {
@@ -55,12 +56,12 @@ message MsgCreateDomainResponse {
 
 message MsgUpdateDomain {
   option (cosmos.msg.v1.signer) = "creator";
-  string creator   = 1;
-  uint64 id        = 2;
-  string domain    = 3;
-  string owner     = 4;
+  string creator = 1;
+  uint64 id = 2;
+  string domain = 3;
+  string owner = 4;
   string timestamp = 5;
-  string txhash    = 6;
+  string txhash = 6;
 }
 
 message MsgUpdateDomainResponse {}
@@ -68,8 +69,16 @@ message MsgUpdateDomainResponse {}
 message MsgDeleteDomain {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1;
-  uint64 id      = 2;
+  string domain = 2;
 }
 
 message MsgDeleteDomainResponse {}
+
+message MsgSetPrimaryDomain {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string domain = 2;
+}
+
+message MsgSetPrimaryDomainResponse {}
 

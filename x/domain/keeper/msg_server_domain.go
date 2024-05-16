@@ -45,7 +45,7 @@ func (k msgServer) UpdateDomain(goCtx context.Context, msg *types.MsgUpdateDomai
 	}
 
 	// Checks that the element exists
-	val, found := k.GetDomain(ctx, msg.Id)
+	val, found := k.GetDomain(ctx, msg.Domain)
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
 	}
@@ -64,9 +64,9 @@ func (k msgServer) DeleteDomain(goCtx context.Context, msg *types.MsgDeleteDomai
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Checks that the element exists
-	val, found := k.GetDomain(ctx, msg.Id)
+	val, found := k.GetDomain(ctx, msg.Domain)
 	if !found {
-		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
+		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Domain))
 	}
 
 	// Checks if the msg creator is the same as the current owner
@@ -74,7 +74,7 @@ func (k msgServer) DeleteDomain(goCtx context.Context, msg *types.MsgDeleteDomai
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.RemoveDomain(ctx, msg.Id)
+	k.RemoveDomain(ctx, msg.Domain)
 
 	return &types.MsgDeleteDomainResponse{}, nil
 }

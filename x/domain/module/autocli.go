@@ -24,9 +24,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "Domain",
-					Use:            "show-domain [id]",
-					Short:          "Shows a domain by id",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+					Use:            "show-domain [domain]",
+					Short:          "Shows a domain by domain",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
 				{
 					RpcMethod:      "ListDomainOpkit",
@@ -74,9 +74,15 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "DeleteDomain",
-					Use:            "delete-domain [id]",
+					Use:            "delete-domain [domain]",
 					Short:          "Delete domain",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
+				},
+				{
+					RpcMethod:      "SetPrimaryDomain",
+					Use:            "set-primary-domain [domain]",
+					Short:          "Send a set-primary-domain tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/opkit.domain.Msg/UpdateParams"
-	Msg_CreateDomain_FullMethodName = "/opkit.domain.Msg/CreateDomain"
-	Msg_UpdateDomain_FullMethodName = "/opkit.domain.Msg/UpdateDomain"
-	Msg_DeleteDomain_FullMethodName = "/opkit.domain.Msg/DeleteDomain"
+	Msg_UpdateParams_FullMethodName     = "/opkit.domain.Msg/UpdateParams"
+	Msg_CreateDomain_FullMethodName     = "/opkit.domain.Msg/CreateDomain"
+	Msg_UpdateDomain_FullMethodName     = "/opkit.domain.Msg/UpdateDomain"
+	Msg_DeleteDomain_FullMethodName     = "/opkit.domain.Msg/DeleteDomain"
+	Msg_SetPrimaryDomain_FullMethodName = "/opkit.domain.Msg/SetPrimaryDomain"
 )
 
 // MsgClient is the client API for Msg service.
@@ -35,6 +36,7 @@ type MsgClient interface {
 	CreateDomain(ctx context.Context, in *MsgCreateDomain, opts ...grpc.CallOption) (*MsgCreateDomainResponse, error)
 	UpdateDomain(ctx context.Context, in *MsgUpdateDomain, opts ...grpc.CallOption) (*MsgUpdateDomainResponse, error)
 	DeleteDomain(ctx context.Context, in *MsgDeleteDomain, opts ...grpc.CallOption) (*MsgDeleteDomainResponse, error)
+	SetPrimaryDomain(ctx context.Context, in *MsgSetPrimaryDomain, opts ...grpc.CallOption) (*MsgSetPrimaryDomainResponse, error)
 }
 
 type msgClient struct {
@@ -81,6 +83,15 @@ func (c *msgClient) DeleteDomain(ctx context.Context, in *MsgDeleteDomain, opts 
 	return out, nil
 }
 
+func (c *msgClient) SetPrimaryDomain(ctx context.Context, in *MsgSetPrimaryDomain, opts ...grpc.CallOption) (*MsgSetPrimaryDomainResponse, error) {
+	out := new(MsgSetPrimaryDomainResponse)
+	err := c.cc.Invoke(ctx, Msg_SetPrimaryDomain_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -91,6 +102,7 @@ type MsgServer interface {
 	CreateDomain(context.Context, *MsgCreateDomain) (*MsgCreateDomainResponse, error)
 	UpdateDomain(context.Context, *MsgUpdateDomain) (*MsgUpdateDomainResponse, error)
 	DeleteDomain(context.Context, *MsgDeleteDomain) (*MsgDeleteDomainResponse, error)
+	SetPrimaryDomain(context.Context, *MsgSetPrimaryDomain) (*MsgSetPrimaryDomainResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -109,6 +121,9 @@ func (UnimplementedMsgServer) UpdateDomain(context.Context, *MsgUpdateDomain) (*
 }
 func (UnimplementedMsgServer) DeleteDomain(context.Context, *MsgDeleteDomain) (*MsgDeleteDomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDomain not implemented")
+}
+func (UnimplementedMsgServer) SetPrimaryDomain(context.Context, *MsgSetPrimaryDomain) (*MsgSetPrimaryDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPrimaryDomain not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -195,6 +210,24 @@ func _Msg_DeleteDomain_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SetPrimaryDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSetPrimaryDomain)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SetPrimaryDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SetPrimaryDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SetPrimaryDomain(ctx, req.(*MsgSetPrimaryDomain))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -217,6 +250,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDomain",
 			Handler:    _Msg_DeleteDomain_Handler,
+		},
+		{
+			MethodName: "SetPrimaryDomain",
+			Handler:    _Msg_SetPrimaryDomain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

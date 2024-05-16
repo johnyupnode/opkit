@@ -51,7 +51,7 @@ func (k Keeper) AppendDomain(
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DomainKey))
 	appendedValue := k.cdc.MustMarshal(&domain)
-	store.Set(GetDomainIDBytes(domain.Id), appendedValue)
+	store.Set(GetDomainIDBytes(domain.Domain), appendedValue)
 
 	// Update domain count
 	k.SetDomainCount(ctx, count+1)
@@ -64,14 +64,14 @@ func (k Keeper) SetDomain(ctx context.Context, domain types.Domain) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DomainKey))
 	b := k.cdc.MustMarshal(&domain)
-	store.Set(GetDomainIDBytes(domain.Id), b)
+	store.Set(GetDomainIDBytes(domain.Domain), b)
 }
 
 // GetDomain returns a domain from its id
-func (k Keeper) GetDomain(ctx context.Context, id uint64) (val types.Domain, found bool) {
+func (k Keeper) GetDomain(ctx context.Context, domain string) (val types.Domain, found bool) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DomainKey))
-	b := store.Get(GetDomainIDBytes(id))
+	b := store.Get(GetDomainIDBytes(domain))
 	if b == nil {
 		return val, false
 	}
@@ -80,10 +80,10 @@ func (k Keeper) GetDomain(ctx context.Context, id uint64) (val types.Domain, fou
 }
 
 // RemoveDomain removes a domain from the store
-func (k Keeper) RemoveDomain(ctx context.Context, id uint64) {
+func (k Keeper) RemoveDomain(ctx context.Context, domain string) {
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DomainKey))
-	store.Delete(GetDomainIDBytes(id))
+	store.Delete(GetDomainIDBytes(domain))
 }
 
 // GetAllDomain returns all domain
@@ -104,9 +104,9 @@ func (k Keeper) GetAllDomain(ctx context.Context) (list []types.Domain) {
 }
 
 // GetDomainIDBytes returns the byte representation of the ID
-func GetDomainIDBytes(id uint64) []byte {
+func GetDomainIDBytes(domain string) []byte {
 	bz := types.KeyPrefix(types.DomainKey)
 	bz = append(bz, []byte("/")...)
-	bz = binary.BigEndian.AppendUint64(bz, id)
+	bz = append(bz, []byte(domain)...)
 	return bz
 }

@@ -76,3 +76,35 @@ func (k Keeper) GetIndexerDomains(ctx sdk.Context, key, value string) ([]types.D
 		},
 	}, nil
 }
+
+// SetPrimaryDomain sets the primary domain.
+func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) error {
+	domains, err := k.GetIndexerDomains(ctx, "opkit", sender)
+	if err != nil {
+		k.logger.Error("failed to get domains", "error", err)
+		return err
+	}
+
+	if len(domains) == 0 {
+		k.logger.Error("no domains found", "sender", sender)
+		return fmt.Errorf("no domains found for sender: %s", sender)
+	}
+
+	// Set the primary domain
+	isSet := false
+	for _, d := range domains {
+		if d.Domain == domain {
+			// Set the primary domain
+			k.logger.Info("set primary domain", "domain", d.Domain)
+			isSet = true
+			k.SetDomain(ctx, d)
+		}
+	}
+
+	if !isSet {
+		k.logger.Error("domain not found", "domain", domain)
+		return fmt.Errorf("domain not found: %s", domain)
+	}
+
+	return nil
+}

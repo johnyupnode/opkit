@@ -3,10 +3,11 @@ package keeper
 import (
 	"context"
 
+	"opkit/x/domain/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"opkit/x/domain/types"
 )
 
 func (k Keeper) ListDomainEvm(goCtx context.Context, req *types.QueryListDomainEvmRequest) (*types.QueryListDomainEvmResponse, error) {

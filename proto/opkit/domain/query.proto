@@ -22,7 +22,7 @@ service Query {
 
   // Queries a list of Domain items.
   rpc Domain    (QueryGetDomainRequest) returns (QueryGetDomainResponse) {
-    option (google.api.http).get = "/opkit/domain/domain/{id}";
+    option (google.api.http).get = "/opkit/domain/domain/{domain}";
 
   }
   rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
@@ -59,7 +59,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetDomainRequest {
-  uint64 id = 1;
+  string domain = 1;
 }
 
 message QueryGetDomainResponse {

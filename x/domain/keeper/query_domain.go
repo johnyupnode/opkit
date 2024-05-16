@@ -45,7 +45,7 @@ func (k Keeper) Domain(ctx context.Context, req *types.QueryGetDomainRequest) (*
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	domain, found := k.GetDomain(ctx, req.Id)
+	domain, found := k.GetDomain(ctx, req.Domain)
 	if !found {
 		return nil, sdkerrors.ErrKeyNotFound
 	}

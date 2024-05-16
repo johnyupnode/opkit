@@ -35,6 +35,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteDomain int = 100
 
+	opWeightMsgSetPrimaryDomain = "op_weight_msg_set_primary_domain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSetPrimaryDomain int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -102,6 +106,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		domainsimulation.SimulateMsgDeleteDomain(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgSetPrimaryDomain int
+	simState.AppParams.GetOrGenerate(opWeightMsgSetPrimaryDomain, &weightMsgSetPrimaryDomain, nil,
+		func(_ *rand.Rand) {
+			weightMsgSetPrimaryDomain = defaultWeightMsgSetPrimaryDomain
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSetPrimaryDomain,
+		domainsimulation.SimulateMsgSetPrimaryDomain(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -131,6 +146,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgDeleteDomain,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				domainsimulation.SimulateMsgDeleteDomain(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgSetPrimaryDomain,
+			defaultWeightMsgSetPrimaryDomain,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				domainsimulation.SimulateMsgSetPrimaryDomain(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

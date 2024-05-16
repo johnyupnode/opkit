@@ -49,9 +49,9 @@ func (msg *MsgUpdateDomain) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgDeleteDomain{}
 
-func NewMsgDeleteDomain(creator string, id uint64) *MsgDeleteDomain {
+func NewMsgDeleteDomain(creator string, domain string) *MsgDeleteDomain {
 	return &MsgDeleteDomain{
-		Id:      id,
+		Domain:  domain,
 		Creator: creator,
 	}
 }
