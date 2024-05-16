@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  rollkit:
+    build: .
+    container_name: ${CHAIN_ID}
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./datadir:/root/.${CHAIN_ID}
+    entrypoint: /usr/src/app/entrypoint.sh
