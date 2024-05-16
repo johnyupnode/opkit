@@ -1,12 +1,13 @@
 package indexer
 
 import (
-	"cosmossdk.io/log"
 	"encoding/json"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"io/ioutil"
 	"net/http"
 	"strconv"
+
+	"cosmossdk.io/log"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type Api interface {

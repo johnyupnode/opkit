@@ -2,12 +2,13 @@ syntax = "proto3";
 package opkit.domain;
 
 option go_package = "opkit/x/domain/types";
-import "gogoproto/gogo.proto"; 
+import "gogoproto/gogo.proto";
+import "amino/amino.proto";
 import "cosmos/base/v1beta1/coin.proto"; 
 
 message Reward {
   
   string domain = 1; 
-  bool is_claim = 2;
+  bool is_claimed = 2 [(amino.dont_omitempty) = true];
   cosmos.base.v1beta1.Coin amount = 3 [(gogoproto.nullable) = false]; 
 }

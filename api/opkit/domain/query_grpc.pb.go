@@ -27,6 +27,7 @@ const (
 	Query_ListDomainByString_FullMethodName = "/opkit.domain.Query/ListDomainByString"
 	Query_Info_FullMethodName               = "/opkit.domain.Query/Info"
 	Query_CheckOwner_FullMethodName         = "/opkit.domain.Query/CheckOwner"
+	Query_Reward_FullMethodName             = "/opkit.domain.Query/Reward"
 )
 
 // QueryClient is the client API for Query service.
@@ -48,6 +49,8 @@ type QueryClient interface {
 	Info(ctx context.Context, in *QueryInfoRequest, opts ...grpc.CallOption) (*QueryInfoResponse, error)
 	// Queries a list of CheckOwner items.
 	CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest, opts ...grpc.CallOption) (*QueryCheckOwnerResponse, error)
+	// Queries a list of Reward items.
+	Reward(ctx context.Context, in *QueryRewardRequest, opts ...grpc.CallOption) (*QueryRewardResponse, error)
 }
 
 type queryClient struct {
@@ -130,6 +133,15 @@ func (c *queryClient) CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest
 	return out, nil
 }
 
+func (c *queryClient) Reward(ctx context.Context, in *QueryRewardRequest, opts ...grpc.CallOption) (*QueryRewardResponse, error) {
+	out := new(QueryRewardResponse)
+	err := c.cc.Invoke(ctx, Query_Reward_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -149,6 +161,8 @@ type QueryServer interface {
 	Info(context.Context, *QueryInfoRequest) (*QueryInfoResponse, error)
 	// Queries a list of CheckOwner items.
 	CheckOwner(context.Context, *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error)
+	// Queries a list of Reward items.
+	Reward(context.Context, *QueryRewardRequest) (*QueryRewardResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -179,6 +193,9 @@ func (UnimplementedQueryServer) Info(context.Context, *QueryInfoRequest) (*Query
 }
 func (UnimplementedQueryServer) CheckOwner(context.Context, *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckOwner not implemented")
+}
+func (UnimplementedQueryServer) Reward(context.Context, *QueryRewardRequest) (*QueryRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Reward not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -337,6 +354,24 @@ func _Query_CheckOwner_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_Reward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Reward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_Reward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Reward(ctx, req.(*QueryRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -375,6 +410,10 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckOwner",
 			Handler:    _Query_CheckOwner_Handler,
+		},
+		{
+			MethodName: "Reward",
+			Handler:    _Query_Reward_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

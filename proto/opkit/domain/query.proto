@@ -8,6 +8,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "opkit/domain/params.proto";
 import "opkit/domain/domain.proto";
+import "opkit/domain/reward.proto";
 
 option go_package = "opkit/x/domain/types";
 
@@ -57,6 +58,12 @@ service Query {
   // Queries a list of CheckOwner items.
   rpc CheckOwner (QueryCheckOwnerRequest) returns (QueryCheckOwnerResponse) {
     option (google.api.http).get = "/opkit/domain/check_owner/{address}";
+  
+  }
+  
+  // Queries a list of Reward items.
+  rpc Reward (QueryRewardRequest) returns (QueryRewardResponse) {
+    option (google.api.http).get = "/opkit/domain/reward/{domain}";
   
   }
 }
@@ -126,5 +133,13 @@ message QueryCheckOwnerRequest {
 
 message QueryCheckOwnerResponse {
   repeated Domain Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryRewardRequest {
+  string domain = 1;
+}
+
+message QueryRewardResponse {
+    Reward Reward = 1 [(gogoproto.nullable) = false];
 }
 

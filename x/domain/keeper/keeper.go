@@ -1,9 +1,10 @@
 package keeper
 
 import (
-	"cosmossdk.io/math"
 	"fmt"
 	"opkit/indexer"
+
+	"cosmossdk.io/math"
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
@@ -12,6 +13,8 @@ import (
 
 	"opkit/x/domain/types"
 )
+
+const AmountClaim = 100000000
 
 type (
 	Keeper struct {
@@ -127,7 +130,7 @@ func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error
 		k.logger.Error("reward already claimed", "domain", domain)
 		return fmt.Errorf("reward already claimed: %s", domain)
 	}
-	if reward.IsClaim {
+	if reward.IsClaimed {
 		k.logger.Error("reward already claimed", "domain", domain)
 		return fmt.Errorf("reward already claimed: %s", domain)
 	}
@@ -162,7 +165,7 @@ func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error
 	}
 
 	// hardcode the claim amount and denom
-	amountClaim := sdk.NewCoin("stake", math.NewInt(1000000))
+	amountClaim := sdk.NewCoin("stake", math.NewInt(AmountClaim))
 	err = k.bankKeeper.SendCoins(ctx, k.accountKeeper.GetModuleAddress(types.ModuleName), claimAddr, sdk.NewCoins(amountClaim))
 	if err != nil {
 		k.logger.Error("failed to send coins", "error", err)
@@ -171,9 +174,9 @@ func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error
 
 	// Set the reward as claimed
 	k.SetReward(ctx, types.Reward{
-		Domain:  domain,
-		IsClaim: true,
-		Amount:  amountClaim,
+		Domain:    domain,
+		IsClaimed: true,
+		Amount:    amountClaim,
 	})
 	k.logger.Info("reward claimed", "domain", domain, "sender", sender, "amount", amountClaim.String())
 

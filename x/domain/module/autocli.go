@@ -63,6 +63,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
 
+				{
+					RpcMethod:      "Reward",
+					Use:            "reward [domain]",
+					Short:          "Query reward",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
