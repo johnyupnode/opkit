@@ -79,6 +79,28 @@ func (k Keeper) GetDomainsFromIndexer(ctx sdk.Context, key, value string) ([]typ
 	return k.convertDomains(domains), nil
 }
 
+// GetDomainInfoFromIndexer returns a domain from the indexer.
+func (k Keeper) GetDomainInfoFromIndexer(ctx sdk.Context, domain string) (types.Domain, error) {
+	d, err := k.indexerApi.GetDomainInfo(ctx, domain)
+	if err != nil {
+		k.logger.Error("failed to get domain from indexer", "error", err)
+		return types.Domain{}, err
+	}
+
+	return k.convertDomain(d), nil
+}
+
+// GetDomainOwnerFromIndexer returns a domain from the indexer.
+func (k Keeper) GetDomainOwnerFromIndexer(ctx sdk.Context, address string) ([]types.Domain, error) {
+	domains, err := k.indexerApi.GetDomainOwner(ctx, address)
+	if err != nil {
+		k.logger.Error("failed to get domain from indexer", "error", err)
+		return nil, err
+	}
+
+	return k.convertDomains(domains), nil
+}
+
 // SetPrimaryDomain sets the primary domain.
 func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) error {
 	domains, err := k.GetDomainsFromIndexer(ctx, "opkit", sender)
@@ -109,17 +131,6 @@ func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) 
 	}
 
 	return nil
-}
-
-// GetDomainInfoFromIndexer returns a domain from the indexer.
-func (k Keeper) GetDomainInfoFromIndexer(ctx sdk.Context, domain string) (types.Domain, error) {
-	d, err := k.indexerApi.GetDomainInfo(ctx, domain)
-	if err != nil {
-		k.logger.Error("failed to get domain from indexer", "error", err)
-		return types.Domain{}, err
-	}
-
-	return k.convertDomain(d), nil
 }
 
 // ClaimReward claims the reward for the domain.

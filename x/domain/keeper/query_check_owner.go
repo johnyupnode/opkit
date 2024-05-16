@@ -17,7 +17,7 @@ func (k Keeper) CheckOwner(goCtx context.Context, req *types.QueryCheckOwnerRequ
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	domains, err := k.GetDomainsFromIndexer(ctx, "opkit", req.Address)
+	domains, err := k.GetDomainOwnerFromIndexer(ctx, req.Address)
 	if err != nil {
 		k.logger.Error("could not get domain from indexer", "error", err)
 		return nil, err

@@ -6,6 +6,7 @@ import (
 	"opkit/x/domain/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ethereum/go-ethereum/common"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -14,10 +15,12 @@ func (k Keeper) ListDomainEvm(goCtx context.Context, req *types.QueryListDomainE
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
-
+	if !common.IsHexAddress(req.Address) {
+		return nil, status.Error(codes.InvalidArgument, "invalid address evm")
+	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	domains, err := k.GetDomainsFromIndexer(ctx, "evm", req.Address)
+	domains, err := k.GetDomainOwnerFromIndexer(ctx, req.Address)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
