@@ -1,5 +1,4 @@
 #!/bin/sh
-source .env
 
 VALIDATOR_NAME=validator1
 KEY_NAME=${CHAIN_ID}-key
@@ -7,15 +6,15 @@ CHAINFLAG="--chain-id ${CHAIN_ID}"
 TOKEN_AMOUNT="10000000000000000000000000stake"
 STAKING_AMOUNT="1000000000stake"
 
-# Symbolic link to daemon
-ln -s $(which ${CHAIN_ID}d) /usr/local/bin/daemon
-
 DA_BLOCK_HEIGHT=$(curl ${RPC_URL}/block | jq -r '.result.block.header.height')
-echo $DA_BLOCK_HEIGHT
-echo $DA_ADDRESS
+echo "Block Height:" $DA_BLOCK_HEIGHT
+echo "DA Address:" $DA_ADDRESS
 
 # build the chain with Rollkit
 ignite chain build
+
+# Symbolic link to daemon
+ln -s $(which ${CHAIN_ID}d) /usr/local/bin/daemon
 
 # reset any existing genesis/chain data
 daemon tendermint unsafe-reset-all

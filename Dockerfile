@@ -1,19 +1,10 @@
-# Use the official Alpine image as a base
-FROM alpine:latest
-
-# Set environment variables for Go
-ENV GO_VERSION=1.22.0
-ENV PATH=$PATH:/usr/local/go/bin
+# Use the official Go image as a base
+FROM golang:1.22.0
 
 # Install dependencies
-RUN apk update && \
-    apk add --no-cache curl wget jq git build-base bash && \
-    rm -rf /var/cache/apk/*
-
-# Install Go
-RUN wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz && \
-    rm go$GO_VERSION.linux-amd64.tar.gz
+RUN apt-get update && \
+    apt-get install -y curl jq git bash && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Ignite CLI
 RUN curl https://get.ignite.com/cli! | bash
