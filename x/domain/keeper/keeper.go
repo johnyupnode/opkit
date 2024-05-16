@@ -57,8 +57,8 @@ func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-// GetIndexerDomains from indexer
-func (k Keeper) GetIndexerDomains(ctx sdk.Context, key, value string) ([]types.Domain, error) {
+// GetDomainsFromIndexer from indexer
+func (k Keeper) GetDomainsFromIndexer(ctx sdk.Context, key, value string) ([]types.Domain, error) {
 	return []types.Domain{
 		{
 			Id:        1,
@@ -79,7 +79,7 @@ func (k Keeper) GetIndexerDomains(ctx sdk.Context, key, value string) ([]types.D
 
 // SetPrimaryDomain sets the primary domain.
 func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) error {
-	domains, err := k.GetIndexerDomains(ctx, "opkit", sender)
+	domains, err := k.GetDomainsFromIndexer(ctx, "opkit", sender)
 	if err != nil {
 		k.logger.Error("failed to get domains", "error", err)
 		return err
@@ -107,4 +107,15 @@ func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) 
 	}
 
 	return nil
+}
+
+// GetDomainInfoFromIndexer returns a domain from the indexer.
+func (k Keeper) GetDomainInfoFromIndexer(ctx sdk.Context, domain string) (types.Domain, error) {
+	return types.Domain{
+		Id:        1,
+		Domain:    "domainIndexer",
+		Owner:     "owner1",
+		Timestamp: ctx.BlockTime().UTC().String(),
+		Txhash:    "txhash1",
+	}, nil
 }

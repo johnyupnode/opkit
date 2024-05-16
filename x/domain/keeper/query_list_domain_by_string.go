@@ -17,7 +17,7 @@ func (k Keeper) ListDomainByString(goCtx context.Context, req *types.QueryListDo
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	domains, err := k.GetIndexerDomains(ctx, req.Key, req.Value)
+	domains, err := k.GetDomainsFromIndexer(ctx, req.Key, req.Value)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}

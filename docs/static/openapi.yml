@@ -16447,6 +16447,59 @@ paths:
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /opkit/domain/check_owner/{address}:
+    get:
+      summary: Queries a list of CheckOwner items.
+      operationId: OpkitDomainQuery_CheckOwner
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Domain:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    domain:
+                      type: string
+                    owner:
+                      type: string
+                    timestamp:
+                      type: string
+                    txhash:
+                      type: string
+                    creator:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /opkit/domain/domain:
     get:
       operationId: OpkitDomainQuery_DomainAll
@@ -16583,6 +16636,57 @@ paths:
     get:
       summary: Queries a list of Domain items.
       operationId: OpkitDomainQuery_Domain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Domain:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uint64
+                  domain:
+                    type: string
+                  owner:
+                    type: string
+                  timestamp:
+                    type: string
+                  txhash:
+                    type: string
+                  creator:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /opkit/domain/info/{domain}:
+    get:
+      summary: Queries a list of Info items.
+      operationId: OpkitDomainQuery_Info
       responses:
         '200':
           description: A successful response.
@@ -23696,7 +23800,47 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  opkit.domain.QueryCheckOwnerResponse:
+    type: object
+    properties:
+      Domain:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            domain:
+              type: string
+            owner:
+              type: string
+            timestamp:
+              type: string
+            txhash:
+              type: string
+            creator:
+              type: string
   opkit.domain.QueryGetDomainResponse:
+    type: object
+    properties:
+      Domain:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uint64
+          domain:
+            type: string
+          owner:
+            type: string
+          timestamp:
+            type: string
+          txhash:
+            type: string
+          creator:
+            type: string
+  opkit.domain.QueryInfoResponse:
     type: object
     properties:
       Domain:

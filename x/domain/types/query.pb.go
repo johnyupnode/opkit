@@ -570,6 +570,182 @@ func (m *QueryListDomainByStringResponse) GetDomain() []Domain {
 	return nil
 }
 
+type QueryInfoRequest struct {
+	Domain string `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+}
+
+func (m *QueryInfoRequest) Reset()         { *m = QueryInfoRequest{} }
+func (m *QueryInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryInfoRequest) ProtoMessage()    {}
+func (*QueryInfoRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_32b16e4bde88f741, []int{12}
+}
+func (m *QueryInfoRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryInfoRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryInfoRequest.Merge(m, src)
+}
+func (m *QueryInfoRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryInfoRequest proto.InternalMessageInfo
+
+func (m *QueryInfoRequest) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
+type QueryInfoResponse struct {
+	Domain Domain `protobuf:"bytes,1,opt,name=Domain,proto3" json:"Domain"`
+}
+
+func (m *QueryInfoResponse) Reset()         { *m = QueryInfoResponse{} }
+func (m *QueryInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryInfoResponse) ProtoMessage()    {}
+func (*QueryInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_32b16e4bde88f741, []int{13}
+}
+func (m *QueryInfoResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryInfoResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryInfoResponse.Merge(m, src)
+}
+func (m *QueryInfoResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryInfoResponse proto.InternalMessageInfo
+
+func (m *QueryInfoResponse) GetDomain() Domain {
+	if m != nil {
+		return m.Domain
+	}
+	return Domain{}
+}
+
+type QueryCheckOwnerRequest struct {
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (m *QueryCheckOwnerRequest) Reset()         { *m = QueryCheckOwnerRequest{} }
+func (m *QueryCheckOwnerRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryCheckOwnerRequest) ProtoMessage()    {}
+func (*QueryCheckOwnerRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_32b16e4bde88f741, []int{14}
+}
+func (m *QueryCheckOwnerRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryCheckOwnerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryCheckOwnerRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryCheckOwnerRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCheckOwnerRequest.Merge(m, src)
+}
+func (m *QueryCheckOwnerRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryCheckOwnerRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCheckOwnerRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryCheckOwnerRequest proto.InternalMessageInfo
+
+func (m *QueryCheckOwnerRequest) GetAddress() string {
+	if m != nil {
+		return m.Address
+	}
+	return ""
+}
+
+type QueryCheckOwnerResponse struct {
+	Domain []Domain `protobuf:"bytes,1,rep,name=Domain,proto3" json:"Domain"`
+}
+
+func (m *QueryCheckOwnerResponse) Reset()         { *m = QueryCheckOwnerResponse{} }
+func (m *QueryCheckOwnerResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryCheckOwnerResponse) ProtoMessage()    {}
+func (*QueryCheckOwnerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_32b16e4bde88f741, []int{15}
+}
+func (m *QueryCheckOwnerResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryCheckOwnerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryCheckOwnerResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryCheckOwnerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCheckOwnerResponse.Merge(m, src)
+}
+func (m *QueryCheckOwnerResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryCheckOwnerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCheckOwnerResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryCheckOwnerResponse proto.InternalMessageInfo
+
+func (m *QueryCheckOwnerResponse) GetDomain() []Domain {
+	if m != nil {
+		return m.Domain
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "opkit.domain.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "opkit.domain.QueryParamsResponse")
@@ -583,55 +759,66 @@ func init() {
 	proto.RegisterType((*QueryListDomainEvmResponse)(nil), "opkit.domain.QueryListDomainEvmResponse")
 	proto.RegisterType((*QueryListDomainByStringRequest)(nil), "opkit.domain.QueryListDomainByStringRequest")
 	proto.RegisterType((*QueryListDomainByStringResponse)(nil), "opkit.domain.QueryListDomainByStringResponse")
+	proto.RegisterType((*QueryInfoRequest)(nil), "opkit.domain.QueryInfoRequest")
+	proto.RegisterType((*QueryInfoResponse)(nil), "opkit.domain.QueryInfoResponse")
+	proto.RegisterType((*QueryCheckOwnerRequest)(nil), "opkit.domain.QueryCheckOwnerRequest")
+	proto.RegisterType((*QueryCheckOwnerResponse)(nil), "opkit.domain.QueryCheckOwnerResponse")
 }
 
 func init() { proto.RegisterFile("opkit/domain/query.proto", fileDescriptor_32b16e4bde88f741) }
 
 var fileDescriptor_32b16e4bde88f741 = []byte{
-	// 683 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x95, 0x4f, 0x6f, 0xd3, 0x30,
-	0x18, 0xc6, 0x9b, 0x8d, 0x15, 0xf5, 0x05, 0x04, 0x98, 0x30, 0x6d, 0x61, 0x64, 0x23, 0xfc, 0xd9,
-	0x1f, 0x20, 0x56, 0x37, 0xa1, 0x89, 0xe3, 0xaa, 0xc1, 0x38, 0x4c, 0x30, 0x82, 0xb8, 0x70, 0xa9,
-	0x5c, 0x66, 0x45, 0x51, 0x93, 0x38, 0xab, 0xb3, 0x8a, 0x50, 0xf5, 0xc2, 0x27, 0x40, 0x9a, 0x38,
-	0xf1, 0x05, 0x38, 0x70, 0xe0, 0x63, 0x8c, 0xdb, 0x24, 0x2e, 0x9c, 0x10, 0xda, 0x90, 0xf8, 0x1a,
-	0x28, 0xb6, 0xab, 0x35, 0x69, 0xda, 0x4d, 0xe3, 0xd2, 0x38, 0xf1, 0xf3, 0x3e, 0xcf, 0xcf, 0x8e,
-	0xdf, 0x14, 0xa6, 0x58, 0xd4, 0xf4, 0x62, 0xbc, 0xcd, 0x02, 0xe2, 0x85, 0x78, 0x67, 0x97, 0xb6,
-	0x12, 0x3b, 0x6a, 0xb1, 0x98, 0xa1, 0x8b, 0x62, 0xc6, 0x96, 0x33, 0xc6, 0x55, 0x12, 0x78, 0x21,
-	0xc3, 0xe2, 0x57, 0x0a, 0x0c, 0xdd, 0x65, 0x2e, 0x13, 0x43, 0x9c, 0x8e, 0xd4, 0xd3, 0x19, 0x97,
-	0x31, 0xd7, 0xa7, 0x98, 0x44, 0x1e, 0x26, 0x61, 0xc8, 0x62, 0x12, 0x7b, 0x2c, 0xe4, 0x6a, 0x76,
-	0xe9, 0x2d, 0xe3, 0x01, 0xe3, 0xb8, 0x41, 0x38, 0x95, 0x69, 0xb8, 0x5d, 0x6d, 0xd0, 0x98, 0x54,
-	0x71, 0x44, 0x5c, 0x2f, 0x14, 0x62, 0xa5, 0x9d, 0xce, 0xa0, 0x45, 0xa4, 0x45, 0x02, 0x5e, 0x38,
-	0x25, 0x2f, 0x72, 0xca, 0xd2, 0x01, 0xbd, 0x4c, 0x7d, 0xb7, 0x84, 0xde, 0xa1, 0x3b, 0xbb, 0x94,
-	0xc7, 0xd6, 0x73, 0xb8, 0x96, 0x79, 0xca, 0x23, 0x16, 0x72, 0x8a, 0x56, 0xa1, 0x2c, 0x7d, 0xa7,
-	0xb4, 0x39, 0x6d, 0xe1, 0xc2, 0xb2, 0x6e, 0xf7, 0x2f, 0xda, 0x96, 0xea, 0x5a, 0x65, 0xff, 0xd7,
-	0x6c, 0xe9, 0xcb, 0xdf, 0x6f, 0x4b, 0x9a, 0xa3, 0xe4, 0x16, 0x86, 0xeb, 0xc2, 0x6f, 0x83, 0xc6,
-	0xeb, 0x42, 0xab, 0x82, 0xd0, 0x24, 0x94, 0x65, 0xb1, 0x70, 0xac, 0x38, 0xea, 0xce, 0xda, 0x84,
-	0xc9, 0x7c, 0x81, 0x62, 0x58, 0x86, 0xf2, 0xfa, 0x71, 0xc5, 0x00, 0x83, 0x9c, 0xab, 0x9d, 0x4b,
-	0x19, 0x1c, 0xa5, 0xb4, 0xea, 0x2a, 0x7e, 0xcd, 0xf7, 0xb3, 0xf1, 0x4f, 0x01, 0x8e, 0xf7, 0x51,
-	0x19, 0xde, 0xb3, 0xe5, 0xa6, 0xdb, 0xe9, 0xa6, 0xdb, 0xf2, 0x15, 0xab, 0x4d, 0xb7, 0xb7, 0x88,
-	0x4b, 0x55, 0xad, 0xd3, 0x57, 0x69, 0x7d, 0xd2, 0x14, 0x6f, 0x5f, 0x42, 0x01, 0xef, 0xf8, 0xe9,
-	0x78, 0xd1, 0x46, 0x06, 0x6b, 0x4c, 0x60, 0xcd, 0x9f, 0x88, 0x25, 0x03, 0x33, 0x5c, 0xab, 0x70,
-	0x43, 0x60, 0x6d, 0x7a, 0x5c, 0xed, 0xe3, 0x8b, 0x34, 0xbc, 0xb7, 0xfc, 0x29, 0x38, 0x4f, 0xb6,
-	0xb7, 0x5b, 0x94, 0x73, 0xb5, 0xfd, 0xbd, 0x5b, 0xcb, 0x81, 0x99, 0xe2, 0xc2, 0xb3, 0xaf, 0xca,
-	0x7a, 0x04, 0xd3, 0x39, 0xcf, 0x27, 0xed, 0xe0, 0x64, 0x94, 0x2d, 0x30, 0x8a, 0xca, 0xfe, 0x03,
-	0xe4, 0x19, 0x98, 0x39, 0xc7, 0x5a, 0xf2, 0x2a, 0x6e, 0x79, 0xa1, 0xdb, 0xa3, 0xb9, 0x02, 0xe3,
-	0x4d, 0x9a, 0x28, 0x92, 0x74, 0x88, 0x74, 0x98, 0x68, 0x13, 0x7f, 0x97, 0x8a, 0xb7, 0x51, 0x71,
-	0xe4, 0x8d, 0xf5, 0x1a, 0x66, 0x87, 0x3a, 0x9d, 0x1d, 0x70, 0xf9, 0x7b, 0x19, 0x26, 0x84, 0x2f,
-	0x6a, 0x42, 0x59, 0x76, 0x15, 0x9a, 0xcb, 0xd6, 0x0d, 0x36, 0xad, 0x71, 0x6b, 0x84, 0x42, 0xc2,
-	0x58, 0x33, 0x1f, 0x7e, 0xfc, 0xd9, 0x1b, 0x9b, 0x44, 0x3a, 0x2e, 0xf8, 0x58, 0xa0, 0xf7, 0x3d,
-	0x54, 0x74, 0xbb, 0xc0, 0x2a, 0xdf, 0xbb, 0xc6, 0x9d, 0xd1, 0x22, 0x15, 0x79, 0x57, 0x44, 0xce,
-	0xa2, 0x9b, 0xb8, 0xe0, 0x23, 0x84, 0x3b, 0xf2, 0xda, 0x45, 0x31, 0x54, 0x64, 0xe1, 0x9a, 0xef,
-	0x17, 0xc6, 0xe7, 0x7b, 0xb7, 0x30, 0x7e, 0xa0, 0xfd, 0x86, 0xad, 0x58, 0x5e, 0xd0, 0x67, 0x0d,
-	0x2e, 0xe7, 0x8e, 0x38, 0x5a, 0x2c, 0xf0, 0x2d, 0xee, 0x1f, 0x63, 0xe9, 0x34, 0x52, 0x05, 0x52,
-	0x15, 0x20, 0xf7, 0xd1, 0x62, 0x16, 0xc4, 0xf7, 0x78, 0x5c, 0x97, 0xe3, 0xba, 0x9c, 0xe8, 0xa8,
-	0x83, 0xdf, 0x45, 0x7b, 0x1a, 0x5c, 0xca, 0x9c, 0x7a, 0x34, 0x3f, 0x32, 0xf0, 0xb8, 0x9d, 0x8c,
-	0x85, 0x93, 0x85, 0x8a, 0x0b, 0x0b, 0xae, 0x45, 0x34, 0x3f, 0x9c, 0x8b, 0xb6, 0x83, 0x3e, 0xaa,
-	0xaf, 0x1a, 0xa0, 0xc1, 0xf3, 0x8e, 0x1e, 0x8c, 0x4c, 0xcc, 0x35, 0x98, 0xf1, 0xf0, 0x94, 0x6a,
-	0x05, 0xf9, 0x58, 0x40, 0xae, 0xa0, 0xea, 0x70, 0xc8, 0x46, 0x52, 0xe7, 0xa2, 0x08, 0x77, 0x9a,
-	0x34, 0xe9, 0xe2, 0x8e, 0xe8, 0xd0, 0x6e, 0xcd, 0xde, 0x3f, 0x34, 0xb5, 0x83, 0x43, 0x53, 0xfb,
-	0x7d, 0x68, 0x6a, 0x1f, 0x8f, 0xcc, 0xd2, 0xc1, 0x91, 0x59, 0xfa, 0x79, 0x64, 0x96, 0xde, 0xe8,
-	0xd2, 0xeb, 0x5d, 0xcf, 0x2d, 0x4e, 0x22, 0xca, 0x1b, 0x65, 0xf1, 0xbf, 0xb8, 0xf2, 0x2f, 0x00,
-	0x00, 0xff, 0xff, 0x5b, 0x71, 0x25, 0x9e, 0xea, 0x07, 0x00, 0x00,
+	// 793 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x96, 0xcf, 0x4f, 0x13, 0x5b,
+	0x14, 0xc7, 0x3b, 0xfc, 0xe8, 0x7b, 0x3d, 0xef, 0xbd, 0x3c, 0xb8, 0x56, 0x84, 0x01, 0xa6, 0x38,
+	0x88, 0x40, 0xd1, 0xb9, 0x69, 0x89, 0x21, 0x2e, 0xa9, 0x28, 0x9a, 0xa0, 0x60, 0x8d, 0x1b, 0x37,
+	0xcd, 0x14, 0x2e, 0x75, 0xd2, 0xe9, 0xdc, 0xa1, 0x77, 0xa8, 0xd6, 0xa6, 0x1b, 0x17, 0xae, 0x4d,
+	0x88, 0x2b, 0xff, 0x01, 0x17, 0x2e, 0xfc, 0x13, 0x5c, 0xb2, 0x24, 0x71, 0xe3, 0xca, 0x18, 0x30,
+	0xf1, 0xdf, 0x30, 0x73, 0xef, 0x6d, 0xda, 0x99, 0x4e, 0x5b, 0x02, 0x9b, 0xce, 0x9d, 0x39, 0xdf,
+	0x73, 0xce, 0xe7, 0xfe, 0xfa, 0xa6, 0x30, 0x49, 0xdd, 0xb2, 0xe5, 0xe1, 0x3d, 0x5a, 0x31, 0x2d,
+	0x07, 0x1f, 0x1c, 0x92, 0x6a, 0xdd, 0x70, 0xab, 0xd4, 0xa3, 0xe8, 0x5f, 0x1e, 0x31, 0x44, 0x44,
+	0x1d, 0x37, 0x2b, 0x96, 0x43, 0x31, 0xff, 0x15, 0x02, 0x35, 0x59, 0xa2, 0x25, 0xca, 0x87, 0xd8,
+	0x1f, 0xc9, 0xaf, 0x33, 0x25, 0x4a, 0x4b, 0x36, 0xc1, 0xa6, 0x6b, 0x61, 0xd3, 0x71, 0xa8, 0x67,
+	0x7a, 0x16, 0x75, 0x98, 0x8c, 0xa6, 0x77, 0x29, 0xab, 0x50, 0x86, 0x8b, 0x26, 0x23, 0xa2, 0x1b,
+	0xae, 0x65, 0x8a, 0xc4, 0x33, 0x33, 0xd8, 0x35, 0x4b, 0x96, 0xc3, 0xc5, 0x52, 0x3b, 0x15, 0x40,
+	0x73, 0xcd, 0xaa, 0x59, 0x61, 0x91, 0x21, 0xf1, 0x10, 0x21, 0x3d, 0x09, 0xe8, 0xa9, 0x5f, 0x77,
+	0x87, 0xeb, 0xf3, 0xe4, 0xe0, 0x90, 0x30, 0x4f, 0x7f, 0x02, 0x57, 0x02, 0x5f, 0x99, 0x4b, 0x1d,
+	0x46, 0xd0, 0x1a, 0xc4, 0x45, 0xdd, 0x49, 0x65, 0x4e, 0x59, 0xfa, 0x27, 0x9b, 0x34, 0x3a, 0x27,
+	0x6d, 0x08, 0x75, 0x2e, 0x71, 0xfc, 0x23, 0x15, 0xfb, 0xf4, 0xfb, 0x4b, 0x5a, 0xc9, 0x4b, 0xb9,
+	0x8e, 0xe1, 0x2a, 0xaf, 0xb7, 0x49, 0xbc, 0x0d, 0xae, 0x95, 0x8d, 0xd0, 0x04, 0xc4, 0x45, 0x32,
+	0xaf, 0x98, 0xc8, 0xcb, 0x37, 0x7d, 0x0b, 0x26, 0xc2, 0x09, 0x92, 0x21, 0x0b, 0xf1, 0x8d, 0x76,
+	0x46, 0x17, 0x83, 0x88, 0xe5, 0x46, 0x7c, 0x86, 0xbc, 0x54, 0xea, 0x05, 0xd9, 0x7e, 0xdd, 0xb6,
+	0x83, 0xed, 0x1f, 0x00, 0xb4, 0xd7, 0x51, 0x16, 0xbc, 0x69, 0x88, 0x45, 0x37, 0xfc, 0x45, 0x37,
+	0xc4, 0x16, 0xcb, 0x45, 0x37, 0x76, 0xcc, 0x12, 0x91, 0xb9, 0xf9, 0x8e, 0x4c, 0xfd, 0x83, 0x22,
+	0x79, 0x3b, 0x3a, 0x44, 0xf0, 0x0e, 0x9f, 0x8f, 0x17, 0x6d, 0x06, 0xb0, 0x86, 0x38, 0xd6, 0xe2,
+	0x40, 0x2c, 0xd1, 0x30, 0xc0, 0xb5, 0x06, 0xd3, 0x1c, 0x6b, 0xcb, 0x62, 0x72, 0x1d, 0xb7, 0xfd,
+	0xe6, 0xad, 0xe9, 0x4f, 0xc2, 0x5f, 0xe6, 0xde, 0x5e, 0x95, 0x30, 0x26, 0x97, 0xbf, 0xf5, 0xaa,
+	0xe7, 0x61, 0x26, 0x3a, 0xf1, 0xe2, 0xb3, 0xd2, 0xef, 0xc0, 0x54, 0xa8, 0xe6, 0xfd, 0x5a, 0x65,
+	0x30, 0xca, 0x0e, 0xa8, 0x51, 0x69, 0x97, 0x00, 0x79, 0x08, 0x5a, 0xa8, 0x62, 0xae, 0xfe, 0xcc,
+	0xab, 0x5a, 0x4e, 0xa9, 0x45, 0x33, 0x06, 0xc3, 0x65, 0x52, 0x97, 0x24, 0xfe, 0x10, 0x25, 0x61,
+	0xb4, 0x66, 0xda, 0x87, 0x84, 0xef, 0x46, 0x22, 0x2f, 0x5e, 0xf4, 0xe7, 0x90, 0xea, 0x59, 0xe9,
+	0x12, 0x80, 0x69, 0x18, 0xe3, 0x65, 0x1f, 0x39, 0xfb, 0x74, 0xd0, 0x4d, 0xd9, 0x84, 0xf1, 0x0e,
+	0xed, 0x25, 0x2e, 0x49, 0x56, 0x1e, 0xe1, 0x7b, 0x2f, 0xc9, 0x6e, 0x79, 0xfb, 0x95, 0x43, 0xaa,
+	0x83, 0xf7, 0xe6, 0x31, 0x5c, 0xeb, 0xca, 0xb9, 0xf8, 0xbc, 0xb3, 0x5f, 0xff, 0x86, 0x51, 0x5e,
+	0x0f, 0x95, 0x21, 0x2e, 0xdc, 0x04, 0xcd, 0x05, 0xf3, 0xba, 0xcd, 0x4a, 0xbd, 0xde, 0x47, 0x21,
+	0x60, 0xf4, 0x99, 0xb7, 0xdf, 0x7e, 0x1d, 0x0d, 0x4d, 0xa0, 0x24, 0x8e, 0x30, 0x49, 0xf4, 0xa6,
+	0x85, 0x8a, 0xe6, 0x23, 0x4a, 0x85, 0x3d, 0x4b, 0xbd, 0xd1, 0x5f, 0x24, 0x5b, 0x2e, 0xf0, 0x96,
+	0x29, 0x34, 0x8b, 0x23, 0xcc, 0x17, 0x37, 0xc4, 0xb3, 0x89, 0x3c, 0x48, 0x88, 0xc4, 0x75, 0xdb,
+	0x8e, 0x6c, 0x1f, 0xf6, 0xac, 0xc8, 0xf6, 0x5d, 0xb6, 0xd3, 0x6b, 0xc6, 0xe2, 0x81, 0x3e, 0x2a,
+	0xf0, 0x7f, 0xe8, 0x6a, 0xa3, 0xe5, 0x88, 0xba, 0xd1, 0xbe, 0xa1, 0xa6, 0xcf, 0x23, 0x95, 0x20,
+	0x19, 0x0e, 0xb2, 0x82, 0x96, 0x83, 0x20, 0xb6, 0xc5, 0xbc, 0x82, 0x18, 0x17, 0x44, 0xa0, 0x21,
+	0x0f, 0x55, 0x13, 0x1d, 0x29, 0xf0, 0x5f, 0xe0, 0xb6, 0xa3, 0xc5, 0xbe, 0x0d, 0xdb, 0x36, 0xa2,
+	0x2e, 0x0d, 0x16, 0x4a, 0x2e, 0xcc, 0xb9, 0x96, 0xd1, 0x62, 0x6f, 0x2e, 0x52, 0xab, 0x74, 0x50,
+	0x7d, 0x56, 0x00, 0x75, 0xdf, 0x73, 0x74, 0xab, 0x6f, 0xc7, 0x90, 0xb1, 0xa8, 0xb7, 0xcf, 0xa9,
+	0x96, 0x90, 0x77, 0x39, 0xe4, 0x2a, 0xca, 0xf4, 0x86, 0x2c, 0xd6, 0x0b, 0x8c, 0x27, 0xe1, 0x46,
+	0x99, 0xd4, 0x9b, 0xb8, 0xc1, 0x9d, 0xa9, 0x89, 0x6c, 0x18, 0xf1, 0x2d, 0x01, 0x69, 0x11, 0x1d,
+	0x3b, 0x7c, 0x45, 0x4d, 0xf5, 0x8c, 0x4b, 0x86, 0x79, 0xce, 0x30, 0x8b, 0xa6, 0x83, 0x0c, 0x96,
+	0xb3, 0x4f, 0xdb, 0xc7, 0xf8, 0x9d, 0x02, 0xd0, 0x36, 0x01, 0x14, 0x75, 0x46, 0xbb, 0x7c, 0x45,
+	0x5d, 0x18, 0xa0, 0x92, 0x00, 0x2b, 0x1c, 0x60, 0x01, 0xcd, 0x07, 0x01, 0x76, 0x7d, 0x65, 0x81,
+	0xfa, 0xd2, 0xf6, 0x2e, 0xe5, 0x8c, 0xe3, 0x53, 0x4d, 0x39, 0x39, 0xd5, 0x94, 0x9f, 0xa7, 0x9a,
+	0xf2, 0xfe, 0x4c, 0x8b, 0x9d, 0x9c, 0x69, 0xb1, 0xef, 0x67, 0x5a, 0xec, 0x45, 0x52, 0x64, 0xbf,
+	0x6e, 0xe5, 0x7b, 0x75, 0x97, 0xb0, 0x62, 0x9c, 0xff, 0x0d, 0x5a, 0xfd, 0x13, 0x00, 0x00, 0xff,
+	0xff, 0x98, 0xff, 0xc7, 0x30, 0xd9, 0x09, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -657,6 +844,10 @@ type QueryClient interface {
 	ListDomainEvm(ctx context.Context, in *QueryListDomainEvmRequest, opts ...grpc.CallOption) (*QueryListDomainEvmResponse, error)
 	// Queries a list of ListDomainByString items.
 	ListDomainByString(ctx context.Context, in *QueryListDomainByStringRequest, opts ...grpc.CallOption) (*QueryListDomainByStringResponse, error)
+	// Queries a list of Info items.
+	Info(ctx context.Context, in *QueryInfoRequest, opts ...grpc.CallOption) (*QueryInfoResponse, error)
+	// Queries a list of CheckOwner items.
+	CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest, opts ...grpc.CallOption) (*QueryCheckOwnerResponse, error)
 }
 
 type queryClient struct {
@@ -721,6 +912,24 @@ func (c *queryClient) ListDomainByString(ctx context.Context, in *QueryListDomai
 	return out, nil
 }
 
+func (c *queryClient) Info(ctx context.Context, in *QueryInfoRequest, opts ...grpc.CallOption) (*QueryInfoResponse, error) {
+	out := new(QueryInfoResponse)
+	err := c.cc.Invoke(ctx, "/opkit.domain.Query/Info", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest, opts ...grpc.CallOption) (*QueryCheckOwnerResponse, error) {
+	out := new(QueryCheckOwnerResponse)
+	err := c.cc.Invoke(ctx, "/opkit.domain.Query/CheckOwner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -734,6 +943,10 @@ type QueryServer interface {
 	ListDomainEvm(context.Context, *QueryListDomainEvmRequest) (*QueryListDomainEvmResponse, error)
 	// Queries a list of ListDomainByString items.
 	ListDomainByString(context.Context, *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error)
+	// Queries a list of Info items.
+	Info(context.Context, *QueryInfoRequest) (*QueryInfoResponse, error)
+	// Queries a list of CheckOwner items.
+	CheckOwner(context.Context, *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -757,6 +970,12 @@ func (*UnimplementedQueryServer) ListDomainEvm(ctx context.Context, req *QueryLi
 }
 func (*UnimplementedQueryServer) ListDomainByString(ctx context.Context, req *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDomainByString not implemented")
+}
+func (*UnimplementedQueryServer) Info(ctx context.Context, req *QueryInfoRequest) (*QueryInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Info not implemented")
+}
+func (*UnimplementedQueryServer) CheckOwner(ctx context.Context, req *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckOwner not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -871,6 +1090,42 @@ func _Query_ListDomainByString_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Info(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/opkit.domain.Query/Info",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Info(ctx, req.(*QueryInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_CheckOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCheckOwnerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).CheckOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/opkit.domain.Query/CheckOwner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).CheckOwner(ctx, req.(*QueryCheckOwnerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "opkit.domain.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -898,6 +1153,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDomainByString",
 			Handler:    _Query_ListDomainByString_Handler,
+		},
+		{
+			MethodName: "Info",
+			Handler:    _Query_Info_Handler,
+		},
+		{
+			MethodName: "CheckOwner",
+			Handler:    _Query_CheckOwner_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1315,6 +1578,136 @@ func (m *QueryListDomainByStringResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryInfoRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryInfoRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryInfoRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Domain) > 0 {
+		i -= len(m.Domain)
+		copy(dAtA[i:], m.Domain)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Domain)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryInfoResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryInfoResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryInfoResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.Domain.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryCheckOwnerRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryCheckOwnerRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryCheckOwnerRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryCheckOwnerResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryCheckOwnerResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryCheckOwnerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Domain) > 0 {
+		for iNdEx := len(m.Domain) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Domain[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -1476,6 +1869,58 @@ func (m *QueryListDomainByStringRequest) Size() (n int) {
 }
 
 func (m *QueryListDomainByStringResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Domain) > 0 {
+		for _, e := range m.Domain {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *QueryInfoRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Domain)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryInfoResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.Domain.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryCheckOwnerRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryCheckOwnerResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2473,6 +2918,337 @@ func (m *QueryListDomainByStringResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: QueryListDomainByStringResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Domain = append(m.Domain, Domain{})
+			if err := m.Domain[len(m.Domain)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryInfoRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryInfoRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Domain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryInfoResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryInfoResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Domain.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryCheckOwnerRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryCheckOwnerRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryCheckOwnerRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryCheckOwnerResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryCheckOwnerResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryCheckOwnerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

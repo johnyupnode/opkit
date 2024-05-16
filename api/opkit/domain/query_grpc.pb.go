@@ -25,6 +25,8 @@ const (
 	Query_ListDomainOpkit_FullMethodName    = "/opkit.domain.Query/ListDomainOpkit"
 	Query_ListDomainEvm_FullMethodName      = "/opkit.domain.Query/ListDomainEvm"
 	Query_ListDomainByString_FullMethodName = "/opkit.domain.Query/ListDomainByString"
+	Query_Info_FullMethodName               = "/opkit.domain.Query/Info"
+	Query_CheckOwner_FullMethodName         = "/opkit.domain.Query/CheckOwner"
 )
 
 // QueryClient is the client API for Query service.
@@ -42,6 +44,10 @@ type QueryClient interface {
 	ListDomainEvm(ctx context.Context, in *QueryListDomainEvmRequest, opts ...grpc.CallOption) (*QueryListDomainEvmResponse, error)
 	// Queries a list of ListDomainByString items.
 	ListDomainByString(ctx context.Context, in *QueryListDomainByStringRequest, opts ...grpc.CallOption) (*QueryListDomainByStringResponse, error)
+	// Queries a list of Info items.
+	Info(ctx context.Context, in *QueryInfoRequest, opts ...grpc.CallOption) (*QueryInfoResponse, error)
+	// Queries a list of CheckOwner items.
+	CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest, opts ...grpc.CallOption) (*QueryCheckOwnerResponse, error)
 }
 
 type queryClient struct {
@@ -106,6 +112,24 @@ func (c *queryClient) ListDomainByString(ctx context.Context, in *QueryListDomai
 	return out, nil
 }
 
+func (c *queryClient) Info(ctx context.Context, in *QueryInfoRequest, opts ...grpc.CallOption) (*QueryInfoResponse, error) {
+	out := new(QueryInfoResponse)
+	err := c.cc.Invoke(ctx, Query_Info_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) CheckOwner(ctx context.Context, in *QueryCheckOwnerRequest, opts ...grpc.CallOption) (*QueryCheckOwnerResponse, error) {
+	out := new(QueryCheckOwnerResponse)
+	err := c.cc.Invoke(ctx, Query_CheckOwner_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -121,6 +145,10 @@ type QueryServer interface {
 	ListDomainEvm(context.Context, *QueryListDomainEvmRequest) (*QueryListDomainEvmResponse, error)
 	// Queries a list of ListDomainByString items.
 	ListDomainByString(context.Context, *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error)
+	// Queries a list of Info items.
+	Info(context.Context, *QueryInfoRequest) (*QueryInfoResponse, error)
+	// Queries a list of CheckOwner items.
+	CheckOwner(context.Context, *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -145,6 +173,12 @@ func (UnimplementedQueryServer) ListDomainEvm(context.Context, *QueryListDomainE
 }
 func (UnimplementedQueryServer) ListDomainByString(context.Context, *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDomainByString not implemented")
+}
+func (UnimplementedQueryServer) Info(context.Context, *QueryInfoRequest) (*QueryInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Info not implemented")
+}
+func (UnimplementedQueryServer) CheckOwner(context.Context, *QueryCheckOwnerRequest) (*QueryCheckOwnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckOwner not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -267,6 +301,42 @@ func _Query_ListDomainByString_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).Info(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_Info_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).Info(ctx, req.(*QueryInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_CheckOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCheckOwnerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).CheckOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_CheckOwner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).CheckOwner(ctx, req.(*QueryCheckOwnerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -297,6 +367,14 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDomainByString",
 			Handler:    _Query_ListDomainByString_Handler,
+		},
+		{
+			MethodName: "Info",
+			Handler:    _Query_Info_Handler,
+		},
+		{
+			MethodName: "CheckOwner",
+			Handler:    _Query_CheckOwner_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

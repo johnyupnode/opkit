@@ -24,7 +24,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "Domain",
-					Use:            "show-domain [domain]",
+					Use:            "get-primary-domain [domain]",
 					Short:          "Shows a domain by domain",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
@@ -47,6 +47,20 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "list-domain-by-string [key] [value]",
 					Short:          "Query list-domain-by-string",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "key"}, {ProtoField: "value"}},
+				},
+
+				{
+					RpcMethod:      "Info",
+					Use:            "info [domain]",
+					Short:          "Query info",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
+				},
+
+				{
+					RpcMethod:      "CheckOwner",
+					Use:            "check-owner [address]",
+					Short:          "Query check-owner",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
 
 				// this line is used by ignite scaffolding # autocli/query

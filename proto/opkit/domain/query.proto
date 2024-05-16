@@ -13,39 +13,51 @@ option go_package = "opkit/x/domain/types";
 
 // Query defines the gRPC querier service.
 service Query {
-
+  
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/opkit/domain/params";
-
+  
   }
-
+  
   // Queries a list of Domain items.
   rpc Domain    (QueryGetDomainRequest) returns (QueryGetDomainResponse) {
     option (google.api.http).get = "/opkit/domain/domain/{domain}";
-
+  
   }
   rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
     option (google.api.http).get = "/opkit/domain/domain";
-
+  
   }
-
+  
   // Queries a list of ListDomainOpkit items.
   rpc ListDomainOpkit (QueryListDomainOpkitRequest) returns (QueryListDomainOpkitResponse) {
     option (google.api.http).get = "/opkit/domain/list_domain_opkit/{address}";
-
+  
   }
-
+  
   // Queries a list of ListDomainEvm items.
   rpc ListDomainEvm (QueryListDomainEvmRequest) returns (QueryListDomainEvmResponse) {
     option (google.api.http).get = "/opkit/domain/list_domain_evm/{address}";
-
+  
   }
-
+  
   // Queries a list of ListDomainByString items.
   rpc ListDomainByString (QueryListDomainByStringRequest) returns (QueryListDomainByStringResponse) {
     option (google.api.http).get = "/opkit/domain/list_domain_by_string/{key}/{value}";
-
+  
+  }
+  
+  // Queries a list of Info items.
+  rpc Info (QueryInfoRequest) returns (QueryInfoResponse) {
+    option (google.api.http).get = "/opkit/domain/info/{domain}";
+  
+  }
+  
+  // Queries a list of CheckOwner items.
+  rpc CheckOwner (QueryCheckOwnerRequest) returns (QueryCheckOwnerResponse) {
+    option (google.api.http).get = "/opkit/domain/check_owner/{address}";
+  
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -53,7 +65,7 @@ message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
@@ -71,8 +83,8 @@ message QueryAllDomainRequest {
 }
 
 message QueryAllDomainResponse {
-  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
-  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Domain                                 Domain     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryListDomainOpkitRequest {
@@ -80,7 +92,7 @@ message QueryListDomainOpkitRequest {
 }
 
 message QueryListDomainOpkitResponse {
-  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+  repeated Domain Domain = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryListDomainEvmRequest {
@@ -88,15 +100,31 @@ message QueryListDomainEvmRequest {
 }
 
 message QueryListDomainEvmResponse {
-  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+  repeated Domain Domain = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryListDomainByStringRequest {
-  string key = 1;
+  string key   = 1;
   string value = 2;
 }
 
 message QueryListDomainByStringResponse {
-  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+  repeated Domain Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryInfoRequest {
+  string domain = 1;
+}
+
+message QueryInfoResponse {
+  Domain Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryCheckOwnerRequest {
+  string address = 1;
+}
+
+message QueryCheckOwnerResponse {
+  repeated Domain Domain = 1 [(gogoproto.nullable) = false];
 }
 

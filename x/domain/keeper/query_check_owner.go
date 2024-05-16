@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListDomainOpkit(goCtx context.Context, req *types.QueryListDomainOpkitRequest) (*types.QueryListDomainOpkitResponse, error) {
+func (k Keeper) CheckOwner(goCtx context.Context, req *types.QueryCheckOwnerRequest) (*types.QueryCheckOwnerResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -19,8 +19,9 @@ func (k Keeper) ListDomainOpkit(goCtx context.Context, req *types.QueryListDomai
 
 	domains, err := k.GetDomainsFromIndexer(ctx, "opkit", req.Address)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		k.logger.Error("could not get domain from indexer", "error", err)
+		return nil, err
 	}
 
-	return &types.QueryListDomainOpkitResponse{Domain: domains}, nil
+	return &types.QueryCheckOwnerResponse{Domain: domains}, nil
 }

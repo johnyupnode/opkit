@@ -10,17 +10,17 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ListDomainEvm(goCtx context.Context, req *types.QueryListDomainEvmRequest) (*types.QueryListDomainEvmResponse, error) {
+func (k Keeper) Info(goCtx context.Context, req *types.QueryInfoRequest) (*types.QueryInfoResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	domains, err := k.GetDomainsFromIndexer(ctx, "evm", req.Address)
+	domain, err := k.GetDomainInfoFromIndexer(ctx, req.Domain)
 	if err != nil {
-		return nil, status.Error(codes.Internal, err.Error())
+		return nil, err
 	}
 
-	return &types.QueryListDomainEvmResponse{Domain: domains}, nil
+	return &types.QueryInfoResponse{Domain: domain}, nil
 }
