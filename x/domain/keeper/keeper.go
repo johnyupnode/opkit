@@ -56,3 +56,23 @@ func (k Keeper) GetAuthority() string {
 func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
+
+// GetIndexerDomains from indexer
+func (k Keeper) GetIndexerDomains(ctx sdk.Context, key, value string) ([]types.Domain, error) {
+	return []types.Domain{
+		{
+			Id:        1,
+			Domain:    "domain1",
+			Owner:     "owner1",
+			Timestamp: ctx.BlockTime().UTC().String(),
+			Txhash:    "txhash1",
+		},
+		{
+			Id:        2,
+			Domain:    "domain2",
+			Owner:     "owner2",
+			Timestamp: ctx.BlockTime().UTC().String(),
+			Txhash:    "txhash2",
+		},
+	}, nil
+}

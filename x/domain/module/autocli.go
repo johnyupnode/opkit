@@ -28,6 +28,27 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Shows a domain by id",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
 				},
+				{
+					RpcMethod:      "ListDomainOpkit",
+					Use:            "list-domain-opkit [address]",
+					Short:          "Query list-domain-opkit",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
+				},
+
+				{
+					RpcMethod:      "ListDomainEvm",
+					Use:            "list-domain-evm [address]",
+					Short:          "Query list-domain-evm",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
+				},
+
+				{
+					RpcMethod:      "ListDomainByString",
+					Use:            "list-domain-by-string [key] [value]",
+					Short:          "Query list-domain-by-string",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "key"}, {ProtoField: "value"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

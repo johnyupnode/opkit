@@ -13,22 +13,39 @@ option go_package = "opkit/x/domain/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  
+
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/opkit/domain/params";
-  
+
   }
-  
+
   // Queries a list of Domain items.
   rpc Domain    (QueryGetDomainRequest) returns (QueryGetDomainResponse) {
     option (google.api.http).get = "/opkit/domain/domain/{id}";
-  
+
+  }
+  rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
+    option (google.api.http).get = "/opkit/domain/domain";
+
   }
 
-  rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
-    option (google.api.http).get = "/opkit/domain/domain{}";
-  
+  // Queries a list of ListDomainOpkit items.
+  rpc ListDomainOpkit (QueryListDomainOpkitRequest) returns (QueryListDomainOpkitResponse) {
+    option (google.api.http).get = "/opkit/domain/list_domain_opkit/{address}";
+
+  }
+
+  // Queries a list of ListDomainEvm items.
+  rpc ListDomainEvm (QueryListDomainEvmRequest) returns (QueryListDomainEvmResponse) {
+    option (google.api.http).get = "/opkit/domain/list_domain_evm/{address}";
+
+  }
+
+  // Queries a list of ListDomainByString items.
+  rpc ListDomainByString (QueryListDomainByStringRequest) returns (QueryListDomainByStringResponse) {
+    option (google.api.http).get = "/opkit/domain/list_domain_by_string/{key}/{value}";
+
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -36,7 +53,7 @@ message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-  
+
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
@@ -54,7 +71,32 @@ message QueryAllDomainRequest {
 }
 
 message QueryAllDomainResponse {
-  repeated Domain                                 Domain     = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryListDomainOpkitRequest {
+  string address = 1;
+}
+
+message QueryListDomainOpkitResponse {
+  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListDomainEvmRequest {
+  string address = 1;
+}
+
+message QueryListDomainEvmResponse {
+  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListDomainByStringRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message QueryListDomainByStringResponse {
+  repeated Domain                                 Domain = 1 [(gogoproto.nullable) = false];
 }
 

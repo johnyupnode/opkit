@@ -16403,6 +16403,169 @@ paths:
           format: uint64
       tags:
         - Query
+  /opkit/domain/list_domain_by_string/{key}/{value}:
+    get:
+      summary: Queries a list of ListDomainByString items.
+      operationId: OpkitDomainQuery_ListDomainByString
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Domain:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    domain:
+                      type: string
+                    owner:
+                      type: string
+                    timestamp:
+                      type: string
+                    txhash:
+                      type: string
+                    creator:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: key
+          in: path
+          required: true
+          type: string
+        - name: value
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /opkit/domain/list_domain_evm/{address}:
+    get:
+      summary: Queries a list of ListDomainEvm items.
+      operationId: OpkitDomainQuery_ListDomainEvm
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Domain:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    domain:
+                      type: string
+                    owner:
+                      type: string
+                    timestamp:
+                      type: string
+                    txhash:
+                      type: string
+                    creator:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /opkit/domain/list_domain_opkit/{address}:
+    get:
+      summary: Queries a list of ListDomainOpkit items.
+      operationId: OpkitDomainQuery_ListDomainOpkit
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Domain:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    domain:
+                      type: string
+                    owner:
+                      type: string
+                    timestamp:
+                      type: string
+                    txhash:
+                      type: string
+                    creator:
+                      type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /opkit/domain/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -23443,6 +23606,69 @@ definitions:
             type: string
           creator:
             type: string
+  opkit.domain.QueryListDomainByStringResponse:
+    type: object
+    properties:
+      Domain:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            domain:
+              type: string
+            owner:
+              type: string
+            timestamp:
+              type: string
+            txhash:
+              type: string
+            creator:
+              type: string
+  opkit.domain.QueryListDomainEvmResponse:
+    type: object
+    properties:
+      Domain:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            domain:
+              type: string
+            owner:
+              type: string
+            timestamp:
+              type: string
+            txhash:
+              type: string
+            creator:
+              type: string
+  opkit.domain.QueryListDomainOpkitResponse:
+    type: object
+    properties:
+      Domain:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            domain:
+              type: string
+            owner:
+              type: string
+            timestamp:
+              type: string
+            txhash:
+              type: string
+            creator:
+              type: string
   opkit.domain.QueryParamsResponse:
     type: object
     properties:

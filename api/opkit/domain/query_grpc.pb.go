@@ -19,9 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName    = "/opkit.domain.Query/Params"
-	Query_Domain_FullMethodName    = "/opkit.domain.Query/Domain"
-	Query_DomainAll_FullMethodName = "/opkit.domain.Query/DomainAll"
+	Query_Params_FullMethodName             = "/opkit.domain.Query/Params"
+	Query_Domain_FullMethodName             = "/opkit.domain.Query/Domain"
+	Query_DomainAll_FullMethodName          = "/opkit.domain.Query/DomainAll"
+	Query_ListDomainOpkit_FullMethodName    = "/opkit.domain.Query/ListDomainOpkit"
+	Query_ListDomainEvm_FullMethodName      = "/opkit.domain.Query/ListDomainEvm"
+	Query_ListDomainByString_FullMethodName = "/opkit.domain.Query/ListDomainByString"
 )
 
 // QueryClient is the client API for Query service.
@@ -33,6 +36,12 @@ type QueryClient interface {
 	// Queries a list of Domain items.
 	Domain(ctx context.Context, in *QueryGetDomainRequest, opts ...grpc.CallOption) (*QueryGetDomainResponse, error)
 	DomainAll(ctx context.Context, in *QueryAllDomainRequest, opts ...grpc.CallOption) (*QueryAllDomainResponse, error)
+	// Queries a list of ListDomainOpkit items.
+	ListDomainOpkit(ctx context.Context, in *QueryListDomainOpkitRequest, opts ...grpc.CallOption) (*QueryListDomainOpkitResponse, error)
+	// Queries a list of ListDomainEvm items.
+	ListDomainEvm(ctx context.Context, in *QueryListDomainEvmRequest, opts ...grpc.CallOption) (*QueryListDomainEvmResponse, error)
+	// Queries a list of ListDomainByString items.
+	ListDomainByString(ctx context.Context, in *QueryListDomainByStringRequest, opts ...grpc.CallOption) (*QueryListDomainByStringResponse, error)
 }
 
 type queryClient struct {
@@ -70,6 +79,33 @@ func (c *queryClient) DomainAll(ctx context.Context, in *QueryAllDomainRequest, 
 	return out, nil
 }
 
+func (c *queryClient) ListDomainOpkit(ctx context.Context, in *QueryListDomainOpkitRequest, opts ...grpc.CallOption) (*QueryListDomainOpkitResponse, error) {
+	out := new(QueryListDomainOpkitResponse)
+	err := c.cc.Invoke(ctx, Query_ListDomainOpkit_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListDomainEvm(ctx context.Context, in *QueryListDomainEvmRequest, opts ...grpc.CallOption) (*QueryListDomainEvmResponse, error) {
+	out := new(QueryListDomainEvmResponse)
+	err := c.cc.Invoke(ctx, Query_ListDomainEvm_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListDomainByString(ctx context.Context, in *QueryListDomainByStringRequest, opts ...grpc.CallOption) (*QueryListDomainByStringResponse, error) {
+	out := new(QueryListDomainByStringResponse)
+	err := c.cc.Invoke(ctx, Query_ListDomainByString_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
@@ -79,6 +115,12 @@ type QueryServer interface {
 	// Queries a list of Domain items.
 	Domain(context.Context, *QueryGetDomainRequest) (*QueryGetDomainResponse, error)
 	DomainAll(context.Context, *QueryAllDomainRequest) (*QueryAllDomainResponse, error)
+	// Queries a list of ListDomainOpkit items.
+	ListDomainOpkit(context.Context, *QueryListDomainOpkitRequest) (*QueryListDomainOpkitResponse, error)
+	// Queries a list of ListDomainEvm items.
+	ListDomainEvm(context.Context, *QueryListDomainEvmRequest) (*QueryListDomainEvmResponse, error)
+	// Queries a list of ListDomainByString items.
+	ListDomainByString(context.Context, *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -94,6 +136,15 @@ func (UnimplementedQueryServer) Domain(context.Context, *QueryGetDomainRequest) 
 }
 func (UnimplementedQueryServer) DomainAll(context.Context, *QueryAllDomainRequest) (*QueryAllDomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DomainAll not implemented")
+}
+func (UnimplementedQueryServer) ListDomainOpkit(context.Context, *QueryListDomainOpkitRequest) (*QueryListDomainOpkitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDomainOpkit not implemented")
+}
+func (UnimplementedQueryServer) ListDomainEvm(context.Context, *QueryListDomainEvmRequest) (*QueryListDomainEvmResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDomainEvm not implemented")
+}
+func (UnimplementedQueryServer) ListDomainByString(context.Context, *QueryListDomainByStringRequest) (*QueryListDomainByStringResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDomainByString not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -162,6 +213,60 @@ func _Query_DomainAll_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ListDomainOpkit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListDomainOpkitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListDomainOpkit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListDomainOpkit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListDomainOpkit(ctx, req.(*QueryListDomainOpkitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListDomainEvm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListDomainEvmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListDomainEvm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListDomainEvm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListDomainEvm(ctx, req.(*QueryListDomainEvmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListDomainByString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListDomainByStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListDomainByString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListDomainByString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListDomainByString(ctx, req.(*QueryListDomainByStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +285,18 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DomainAll",
 			Handler:    _Query_DomainAll_Handler,
+		},
+		{
+			MethodName: "ListDomainOpkit",
+			Handler:    _Query_ListDomainOpkit_Handler,
+		},
+		{
+			MethodName: "ListDomainEvm",
+			Handler:    _Query_ListDomainEvm_Handler,
+		},
+		{
+			MethodName: "ListDomainByString",
+			Handler:    _Query_ListDomainByString_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
