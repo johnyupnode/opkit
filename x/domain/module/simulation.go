@@ -56,11 +56,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		Params: types.DefaultParams(),
 		DomainList: []types.Domain{
 			{
-				Id:      0,
+				Domain:  "domain1.opkit",
 				Creator: sample.AccAddress(),
 			},
 			{
-				Id:      1,
+				Domain:  "domain2.opkit",
 				Creator: sample.AccAddress(),
 			},
 		},

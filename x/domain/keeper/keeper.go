@@ -183,9 +183,17 @@ func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error
 func (k Keeper) convertDomains(domains []indexer.DomainIndexer) []types.Domain {
 	domainsConverted := make([]types.Domain, 0, len(domains))
 	for _, d := range domains {
+		stringRecords := make([]types.StringRecord, 0, len(d.StringRecords))
+		for key, value := range d.StringRecords {
+			stringRecords = append(stringRecords, types.StringRecord{
+				Key:   key,
+				Value: value,
+			})
+		}
 		domainsConverted = append(domainsConverted, types.Domain{
-			Domain: d.Domain,
-			Owner:  d.Owner,
+			Domain:        d.Domain,
+			Owner:         d.Owner,
+			StringRecords: stringRecords,
 		})
 	}
 
@@ -193,8 +201,16 @@ func (k Keeper) convertDomains(domains []indexer.DomainIndexer) []types.Domain {
 }
 
 func (k Keeper) convertDomain(domain indexer.DomainIndexer) types.Domain {
+	stringRecords := make([]types.StringRecord, 0, len(domain.StringRecords))
+	for key, value := range domain.StringRecords {
+		stringRecords = append(stringRecords, types.StringRecord{
+			Key:   key,
+			Value: value,
+		})
+	}
 	return types.Domain{
-		Domain: domain.Domain,
-		Owner:  domain.Owner,
+		Domain:        domain.Domain,
+		Owner:         domain.Owner,
+		StringRecords: stringRecords,
 	}
 }

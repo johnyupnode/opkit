@@ -8,6 +8,6 @@ import "cosmos/base/v1beta1/coin.proto";
 message Reward {
   
   string domain = 1; 
-  bool isClaim = 2; 
+  bool is_claim = 2;
   cosmos.base.v1beta1.Coin amount = 3 [(gogoproto.nullable) = false]; 
 }

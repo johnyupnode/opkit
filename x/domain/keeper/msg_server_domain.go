@@ -15,11 +15,9 @@ func (k msgServer) CreateDomain(goCtx context.Context, msg *types.MsgCreateDomai
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var domain = types.Domain{
-		Creator:   msg.Creator,
-		Domain:    msg.Domain,
-		Owner:     msg.Owner,
-		Timestamp: msg.Timestamp,
-		Txhash:    msg.Txhash,
+		Creator: msg.Creator,
+		Domain:  msg.Domain,
+		Owner:   msg.Owner,
 	}
 
 	id := k.AppendDomain(
@@ -36,18 +34,15 @@ func (k msgServer) UpdateDomain(goCtx context.Context, msg *types.MsgUpdateDomai
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var domain = types.Domain{
-		Creator:   msg.Creator,
-		Id:        msg.Id,
-		Domain:    msg.Domain,
-		Owner:     msg.Owner,
-		Timestamp: msg.Timestamp,
-		Txhash:    msg.Txhash,
+		Creator: msg.Creator,
+		Domain:  msg.Domain,
+		Owner:   msg.Owner,
 	}
 
 	// Checks that the element exists
 	val, found := k.GetDomain(ctx, msg.Domain)
 	if !found {
-		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Id))
+		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.Domain))
 	}
 
 	// Checks if the msg creator is the same as the current owner

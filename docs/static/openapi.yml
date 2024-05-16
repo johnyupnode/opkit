@@ -16234,17 +16234,19 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: string
-                      format: uint64
                     domain:
                       type: string
                     owner:
                       type: string
-                    timestamp:
-                      type: string
-                    txhash:
-                      type: string
+                    string_records:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
                     creator:
                       type: string
         default:
@@ -16286,17 +16288,19 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: string
-                      format: uint64
                     domain:
                       type: string
                     owner:
                       type: string
-                    timestamp:
-                      type: string
-                    txhash:
-                      type: string
+                    string_records:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
                     creator:
                       type: string
               pagination:
@@ -16417,17 +16421,19 @@ paths:
               Domain:
                 type: object
                 properties:
-                  id:
-                    type: string
-                    format: uint64
                   domain:
                     type: string
                   owner:
                     type: string
-                  timestamp:
-                    type: string
-                  txhash:
-                    type: string
+                  string_records:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
                   creator:
                     type: string
         default:
@@ -16468,17 +16474,19 @@ paths:
               Domain:
                 type: object
                 properties:
-                  id:
-                    type: string
-                    format: uint64
                   domain:
                     type: string
                   owner:
                     type: string
-                  timestamp:
-                    type: string
-                  txhash:
-                    type: string
+                  string_records:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
                   creator:
                     type: string
         default:
@@ -16521,17 +16529,19 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: string
-                      format: uint64
                     domain:
                       type: string
                     owner:
                       type: string
-                    timestamp:
-                      type: string
-                    txhash:
-                      type: string
+                    string_records:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
                     creator:
                       type: string
         default:
@@ -16578,17 +16588,19 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: string
-                      format: uint64
                     domain:
                       type: string
                     owner:
                       type: string
-                    timestamp:
-                      type: string
-                    txhash:
-                      type: string
+                    string_records:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
                     creator:
                       type: string
         default:
@@ -16631,17 +16643,19 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: string
-                      format: uint64
                     domain:
                       type: string
                     owner:
                       type: string
-                    timestamp:
-                      type: string
-                    txhash:
-                      type: string
+                    string_records:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                          value:
+                            type: string
                     creator:
                       type: string
         default:
@@ -16906,9 +16920,6 @@ paths:
             properties:
               creator:
                 type: string
-              id:
-                type: string
-                format: uint64
               domain:
                 type: string
               owner:
@@ -23704,17 +23715,19 @@ definitions:
   opkit.domain.Domain:
     type: object
     properties:
-      id:
-        type: string
-        format: uint64
       domain:
         type: string
       owner:
         type: string
-      timestamp:
-        type: string
-      txhash:
-        type: string
+      string_records:
+        type: array
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+            value:
+              type: string
       creator:
         type: string
   opkit.domain.Params:
@@ -23728,17 +23741,19 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
-              format: uint64
             domain:
               type: string
             owner:
               type: string
-            timestamp:
-              type: string
-            txhash:
-              type: string
+            string_records:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
             creator:
               type: string
       pagination:
@@ -23775,17 +23790,19 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
-              format: uint64
             domain:
               type: string
             owner:
               type: string
-            timestamp:
-              type: string
-            txhash:
-              type: string
+            string_records:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
             creator:
               type: string
   opkit.domain.QueryGetDomainResponse:
@@ -23794,17 +23811,19 @@ definitions:
       Domain:
         type: object
         properties:
-          id:
-            type: string
-            format: uint64
           domain:
             type: string
           owner:
             type: string
-          timestamp:
-            type: string
-          txhash:
-            type: string
+          string_records:
+            type: array
+            items:
+              type: object
+              properties:
+                key:
+                  type: string
+                value:
+                  type: string
           creator:
             type: string
   opkit.domain.QueryInfoResponse:
@@ -23813,17 +23832,19 @@ definitions:
       Domain:
         type: object
         properties:
-          id:
-            type: string
-            format: uint64
           domain:
             type: string
           owner:
             type: string
-          timestamp:
-            type: string
-          txhash:
-            type: string
+          string_records:
+            type: array
+            items:
+              type: object
+              properties:
+                key:
+                  type: string
+                value:
+                  type: string
           creator:
             type: string
   opkit.domain.QueryListDomainByStringResponse:
@@ -23834,17 +23855,19 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
-              format: uint64
             domain:
               type: string
             owner:
               type: string
-            timestamp:
-              type: string
-            txhash:
-              type: string
+            string_records:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
             creator:
               type: string
   opkit.domain.QueryListDomainEvmResponse:
@@ -23855,17 +23878,19 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
-              format: uint64
             domain:
               type: string
             owner:
               type: string
-            timestamp:
-              type: string
-            txhash:
-              type: string
+            string_records:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
             creator:
               type: string
   opkit.domain.QueryListDomainOpkitResponse:
@@ -23876,17 +23901,19 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
-              format: uint64
             domain:
               type: string
             owner:
               type: string
-            timestamp:
-              type: string
-            txhash:
-              type: string
+            string_records:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
             creator:
               type: string
   opkit.domain.QueryParamsResponse:
@@ -23896,6 +23923,13 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  opkit.domain.StringRecord:
+    type: object
+    properties:
+      key:
+        type: string
+      value:
+        type: string
   opkit.domain.MsgClaimReward:
     type: object
     properties:
@@ -23947,9 +23981,6 @@ definitions:
     properties:
       creator:
         type: string
-      id:
-        type: string
-        format: uint64
       domain:
         type: string
       owner:

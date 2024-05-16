@@ -1954,7 +1954,6 @@ func (x *fastReflection_MsgCreateDomainResponse) ProtoMethods() *protoiface.Meth
 var (
 	md_MsgUpdateDomain           protoreflect.MessageDescriptor
 	fd_MsgUpdateDomain_creator   protoreflect.FieldDescriptor
-	fd_MsgUpdateDomain_id        protoreflect.FieldDescriptor
 	fd_MsgUpdateDomain_domain    protoreflect.FieldDescriptor
 	fd_MsgUpdateDomain_owner     protoreflect.FieldDescriptor
 	fd_MsgUpdateDomain_timestamp protoreflect.FieldDescriptor
@@ -1965,7 +1964,6 @@ func init() {
 	file_opkit_domain_tx_proto_init()
 	md_MsgUpdateDomain = File_opkit_domain_tx_proto.Messages().ByName("MsgUpdateDomain")
 	fd_MsgUpdateDomain_creator = md_MsgUpdateDomain.Fields().ByName("creator")
-	fd_MsgUpdateDomain_id = md_MsgUpdateDomain.Fields().ByName("id")
 	fd_MsgUpdateDomain_domain = md_MsgUpdateDomain.Fields().ByName("domain")
 	fd_MsgUpdateDomain_owner = md_MsgUpdateDomain.Fields().ByName("owner")
 	fd_MsgUpdateDomain_timestamp = md_MsgUpdateDomain.Fields().ByName("timestamp")
@@ -2043,12 +2041,6 @@ func (x *fastReflection_MsgUpdateDomain) Range(f func(protoreflect.FieldDescript
 			return
 		}
 	}
-	if x.Id != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Id)
-		if !f(fd_MsgUpdateDomain_id, value) {
-			return
-		}
-	}
 	if x.Domain != "" {
 		value := protoreflect.ValueOfString(x.Domain)
 		if !f(fd_MsgUpdateDomain_domain, value) {
@@ -2090,8 +2082,6 @@ func (x *fastReflection_MsgUpdateDomain) Has(fd protoreflect.FieldDescriptor) bo
 	switch fd.FullName() {
 	case "opkit.domain.MsgUpdateDomain.creator":
 		return x.Creator != ""
-	case "opkit.domain.MsgUpdateDomain.id":
-		return x.Id != uint64(0)
 	case "opkit.domain.MsgUpdateDomain.domain":
 		return x.Domain != ""
 	case "opkit.domain.MsgUpdateDomain.owner":
@@ -2118,8 +2108,6 @@ func (x *fastReflection_MsgUpdateDomain) Clear(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "opkit.domain.MsgUpdateDomain.creator":
 		x.Creator = ""
-	case "opkit.domain.MsgUpdateDomain.id":
-		x.Id = uint64(0)
 	case "opkit.domain.MsgUpdateDomain.domain":
 		x.Domain = ""
 	case "opkit.domain.MsgUpdateDomain.owner":
@@ -2147,9 +2135,6 @@ func (x *fastReflection_MsgUpdateDomain) Get(descriptor protoreflect.FieldDescri
 	case "opkit.domain.MsgUpdateDomain.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
-	case "opkit.domain.MsgUpdateDomain.id":
-		value := x.Id
-		return protoreflect.ValueOfUint64(value)
 	case "opkit.domain.MsgUpdateDomain.domain":
 		value := x.Domain
 		return protoreflect.ValueOfString(value)
@@ -2184,8 +2169,6 @@ func (x *fastReflection_MsgUpdateDomain) Set(fd protoreflect.FieldDescriptor, va
 	switch fd.FullName() {
 	case "opkit.domain.MsgUpdateDomain.creator":
 		x.Creator = value.Interface().(string)
-	case "opkit.domain.MsgUpdateDomain.id":
-		x.Id = value.Uint()
 	case "opkit.domain.MsgUpdateDomain.domain":
 		x.Domain = value.Interface().(string)
 	case "opkit.domain.MsgUpdateDomain.owner":
@@ -2216,8 +2199,6 @@ func (x *fastReflection_MsgUpdateDomain) Mutable(fd protoreflect.FieldDescriptor
 	switch fd.FullName() {
 	case "opkit.domain.MsgUpdateDomain.creator":
 		panic(fmt.Errorf("field creator of message opkit.domain.MsgUpdateDomain is not mutable"))
-	case "opkit.domain.MsgUpdateDomain.id":
-		panic(fmt.Errorf("field id of message opkit.domain.MsgUpdateDomain is not mutable"))
 	case "opkit.domain.MsgUpdateDomain.domain":
 		panic(fmt.Errorf("field domain of message opkit.domain.MsgUpdateDomain is not mutable"))
 	case "opkit.domain.MsgUpdateDomain.owner":
@@ -2241,8 +2222,6 @@ func (x *fastReflection_MsgUpdateDomain) NewField(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "opkit.domain.MsgUpdateDomain.creator":
 		return protoreflect.ValueOfString("")
-	case "opkit.domain.MsgUpdateDomain.id":
-		return protoreflect.ValueOfUint64(uint64(0))
 	case "opkit.domain.MsgUpdateDomain.domain":
 		return protoreflect.ValueOfString("")
 	case "opkit.domain.MsgUpdateDomain.owner":
@@ -2324,9 +2303,6 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.Id != 0 {
-			n += 1 + runtime.Sov(uint64(x.Id))
-		}
 		l = len(x.Domain)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -2377,33 +2353,28 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 			copy(dAtA[i:], x.Txhash)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Txhash)))
 			i--
-			dAtA[i] = 0x32
+			dAtA[i] = 0x2a
 		}
 		if len(x.Timestamp) > 0 {
 			i -= len(x.Timestamp)
 			copy(dAtA[i:], x.Timestamp)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Timestamp)))
 			i--
-			dAtA[i] = 0x2a
+			dAtA[i] = 0x22
 		}
 		if len(x.Owner) > 0 {
 			i -= len(x.Owner)
 			copy(dAtA[i:], x.Owner)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Owner)))
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x1a
 		}
 		if len(x.Domain) > 0 {
 			i -= len(x.Domain)
 			copy(dAtA[i:], x.Domain)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Domain)))
 			i--
-			dAtA[i] = 0x1a
-		}
-		if x.Id != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
-			i--
-			dAtA[i] = 0x10
+			dAtA[i] = 0x12
 		}
 		if len(x.Creator) > 0 {
 			i -= len(x.Creator)
@@ -2494,25 +2465,6 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 				x.Creator = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-				}
-				x.Id = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.Id |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
 				}
@@ -2544,7 +2496,7 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 				}
 				x.Domain = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
 				}
@@ -2576,7 +2528,7 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 				}
 				x.Owner = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 5:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Timestamp", wireType)
 				}
@@ -2608,7 +2560,7 @@ func (x *fastReflection_MsgUpdateDomain) ProtoMethods() *protoiface.Methods {
 				}
 				x.Timestamp = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 6:
+			case 5:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Txhash", wireType)
 				}
@@ -5746,11 +5698,10 @@ type MsgUpdateDomain struct {
 	unknownFields protoimpl.UnknownFields
 
 	Creator   string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Id        uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Domain    string `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	Owner     string `protobuf:"bytes,4,opt,name=owner,proto3" json:"owner,omitempty"`
-	Timestamp string `protobuf:"bytes,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Txhash    string `protobuf:"bytes,6,opt,name=txhash,proto3" json:"txhash,omitempty"`
+	Domain    string `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	Owner     string `protobuf:"bytes,3,opt,name=owner,proto3" json:"owner,omitempty"`
+	Timestamp string `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Txhash    string `protobuf:"bytes,5,opt,name=txhash,proto3" json:"txhash,omitempty"`
 }
 
 func (x *MsgUpdateDomain) Reset() {
@@ -5778,13 +5729,6 @@ func (x *MsgUpdateDomain) GetCreator() string {
 		return x.Creator
 	}
 	return ""
-}
-
-func (x *MsgUpdateDomain) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 func (x *MsgUpdateDomain) GetDomain() string {
@@ -6088,16 +6032,15 @@ var file_opkit_domain_tx_proto_rawDesc = []byte{
 	0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x29, 0x0a, 0x17, 0x4d,
 	0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22, 0xad, 0x01, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x55, 0x70,
+	0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x22, 0x9d, 0x01, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x55, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72,
 	0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65,
-	0x61, 0x74, 0x6f, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x02, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x18, 0x03,
+	0x61, 0x74, 0x6f, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x12, 0x14, 0x0a, 0x05,
-	0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e,
+	0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e,
 	0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
-	0x12, 0x16, 0x0a, 0x06, 0x74, 0x78, 0x68, 0x61, 0x73, 0x68, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
+	0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
+	0x12, 0x16, 0x0a, 0x06, 0x74, 0x78, 0x68, 0x61, 0x73, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x06, 0x74, 0x78, 0x68, 0x61, 0x73, 0x68, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,

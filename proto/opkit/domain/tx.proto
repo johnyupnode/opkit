@@ -58,11 +58,10 @@ message MsgCreateDomainResponse {
 message MsgUpdateDomain {
   option (cosmos.msg.v1.signer) = "creator";
   string creator   = 1;
-  uint64 id        = 2;
-  string domain    = 3;
-  string owner     = 4;
-  string timestamp = 5;
-  string txhash    = 6;
+  string domain    = 2;
+  string owner     = 3;
+  string timestamp = 4;
+  string txhash    = 5;
 }
 
 message MsgUpdateDomainResponse {}

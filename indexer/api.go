@@ -34,14 +34,7 @@ func (a *apiHandle) GetDomainInfo(ctx sdk.Context, domain string) (DomainIndexer
 	if err != nil {
 		return DomainIndexer{}, err
 	}
-	var domainInfo DomainIndexer
-	err = json.Unmarshal(data, &domainInfo)
-	if err != nil {
-		a.logger.Error("[GetDomainInfo] unmarshall", "err", err.Error())
-		return DomainIndexer{}, err
-	}
-
-	return domainInfo, nil
+	return a.parseDomain(data)
 }
 
 func (a *apiHandle) GetDomainOwner(ctx sdk.Context, address string) ([]DomainIndexer, error) {
@@ -53,14 +46,7 @@ func (a *apiHandle) GetDomainOwner(ctx sdk.Context, address string) ([]DomainInd
 		return nil, err
 	}
 
-	var domains []DomainIndexer
-	err = json.Unmarshal(data, &domains)
-	if err != nil {
-		a.logger.Error("[GetDomainOwner] unmarshall", "err", err.Error())
-		return nil, err
-	}
-
-	return domains, nil
+	return a.parseDomains(data)
 }
 
 func (a *apiHandle) GetDomainStringRecord(ctx sdk.Context, key, value string) ([]DomainIndexer, error) {
@@ -72,14 +58,7 @@ func (a *apiHandle) GetDomainStringRecord(ctx sdk.Context, key, value string) ([
 		return nil, err
 	}
 
-	var domains []DomainIndexer
-	err = json.Unmarshal(data, &domains)
-	if err != nil {
-		a.logger.Error("[GetDomainStringRecord] unmarshall", "err", err.Error())
-		return nil, err
-	}
-
-	return domains, nil
+	return a.parseDomains(data)
 }
 
 func (a *apiHandle) doHttp(url string) ([]byte, error) {
@@ -101,4 +80,26 @@ func (a *apiHandle) doHttp(url string) ([]byte, error) {
 
 	// Read the response body
 	return ioutil.ReadAll(resp.Body)
+}
+
+func (a *apiHandle) parseDomains(data []byte) ([]DomainIndexer, error) {
+	var domains []DomainIndexer
+	err := json.Unmarshal(data, &domains)
+	if err != nil {
+		a.logger.Error("Error parsing JSON", "err", err.Error())
+		return nil, err
+	}
+
+	return domains, nil
+}
+
+func (a *apiHandle) parseDomain(data []byte) (DomainIndexer, error) {
+	var domain DomainIndexer
+	err := json.Unmarshal(data, &domain)
+	if err != nil {
+		a.logger.Error("Error parsing JSON", "err", err.Error())
+		return DomainIndexer{}, err
+	}
+
+	return domain, nil
 }

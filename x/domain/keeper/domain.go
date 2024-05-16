@@ -42,21 +42,12 @@ func (k Keeper) AppendDomain(
 	ctx context.Context,
 	domain types.Domain,
 ) uint64 {
-	// Create the domain
-	count := k.GetDomainCount(ctx)
-
-	// Set the ID of the appended value
-	domain.Id = count
-
 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DomainKey))
 	appendedValue := k.cdc.MustMarshal(&domain)
 	store.Set(GetDomainIDBytes(domain.Domain), appendedValue)
 
-	// Update domain count
-	k.SetDomainCount(ctx, count+1)
-
-	return count
+	return 0
 }
 
 // SetDomain set a specific domain in the store

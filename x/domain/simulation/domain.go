@@ -68,7 +68,7 @@ func SimulateMsgUpdateDomain(
 			return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "domain creator not found"), nil, nil
 		}
 		msg.Creator = simAccount.Address.String()
-		msg.Id = domain.Id
+		msg.Domain = domain.Domain
 
 		txCtx := simulation.OperationInput{
 			R:               r,
@@ -112,7 +112,7 @@ func SimulateMsgDeleteDomain(
 			return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "domain creator not found"), nil, nil
 		}
 		msg.Creator = simAccount.Address.String()
-		msg.Id = domain.Id
+		msg.Domain = domain.Domain
 
 		txCtx := simulation.OperationInput{
 			R:               r,

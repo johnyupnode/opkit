@@ -28,9 +28,8 @@ func (msg *MsgCreateDomain) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgUpdateDomain{}
 
-func NewMsgUpdateDomain(creator string, id uint64, domain string, owner string, timestamp string, txhash string) *MsgUpdateDomain {
+func NewMsgUpdateDomain(creator string, domain string, owner string, timestamp string, txhash string) *MsgUpdateDomain {
 	return &MsgUpdateDomain{
-		Id:        id,
 		Creator:   creator,
 		Domain:    domain,
 		Owner:     owner,

@@ -19,17 +19,13 @@ func DefaultGenesis() *GenesisState {
 // Validate performs basic genesis state validation returning an error upon any
 // failure.
 func (gs GenesisState) Validate() error {
-	// Check for duplicated ID in domain
-	domainIdMap := make(map[uint64]bool)
-	domainCount := gs.GetDomainCount()
+	// Check for duplicated domain
+	domainIdMap := make(map[string]bool)
 	for _, elem := range gs.DomainList {
-		if _, ok := domainIdMap[elem.Id]; ok {
+		if _, ok := domainIdMap[elem.Domain]; ok {
 			return fmt.Errorf("duplicated id for domain")
 		}
-		if elem.Id >= domainCount {
-			return fmt.Errorf("domain id should be lower or equal than the last id")
-		}
-		domainIdMap[elem.Id] = true
+		domainIdMap[elem.Domain] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

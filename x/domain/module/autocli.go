@@ -52,7 +52,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod:      "Info",
 					Use:            "info [domain]",
-					Short:          "Query info",
+					Short:          "Query information of specific domain",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
 
@@ -73,24 +73,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
-				},
-				{
-					RpcMethod:      "CreateDomain",
-					Use:            "create-domain [domain] [owner] [timestamp] [txhash]",
-					Short:          "Create domain",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}, {ProtoField: "owner"}, {ProtoField: "timestamp"}, {ProtoField: "txhash"}},
-				},
-				{
-					RpcMethod:      "UpdateDomain",
-					Use:            "update-domain [id] [domain] [owner] [timestamp] [txhash]",
-					Short:          "Update domain",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "domain"}, {ProtoField: "owner"}, {ProtoField: "timestamp"}, {ProtoField: "txhash"}},
-				},
-				{
-					RpcMethod:      "DeleteDomain",
-					Use:            "delete-domain [domain]",
-					Short:          "Delete domain",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
 				{
 					RpcMethod:      "SetPrimaryDomain",
