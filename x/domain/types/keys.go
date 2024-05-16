@@ -22,4 +22,5 @@ func KeyPrefix(p string) []byte {
 const (
 	DomainKey      = "Domain/value/"
 	DomainCountKey = "Domain/count/"
+	RewardKey      = "Reward/value/"
 )

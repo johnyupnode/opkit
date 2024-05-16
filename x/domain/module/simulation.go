@@ -39,6 +39,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSetPrimaryDomain int = 100
 
+	opWeightMsgClaimReward = "op_weight_msg_claim_reward"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgClaimReward int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -117,6 +121,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		domainsimulation.SimulateMsgSetPrimaryDomain(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgClaimReward int
+	simState.AppParams.GetOrGenerate(opWeightMsgClaimReward, &weightMsgClaimReward, nil,
+		func(_ *rand.Rand) {
+			weightMsgClaimReward = defaultWeightMsgClaimReward
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgClaimReward,
+		domainsimulation.SimulateMsgClaimReward(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -154,6 +169,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgSetPrimaryDomain,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				domainsimulation.SimulateMsgSetPrimaryDomain(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgClaimReward,
+			defaultWeightMsgClaimReward,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				domainsimulation.SimulateMsgClaimReward(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

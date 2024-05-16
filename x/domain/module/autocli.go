@@ -98,6 +98,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a set-primary-domain tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
 				},
+				{
+					RpcMethod:      "ClaimReward",
+					Use:            "claim-reward [domain]",
+					Short:          "Send a claim-reward tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "domain"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

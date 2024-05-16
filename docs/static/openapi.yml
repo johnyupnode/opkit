@@ -16219,234 +16219,6 @@ paths:
               parameters.
       tags:
         - Msg
-  /opkit.domain.Msg/CreateDomain:
-    post:
-      operationId: OpkitDomainMsg_CreateDomain
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              domain:
-                type: string
-              owner:
-                type: string
-              timestamp:
-                type: string
-              txhash:
-                type: string
-      tags:
-        - Msg
-  /opkit.domain.Msg/DeleteDomain:
-    post:
-      operationId: OpkitDomainMsg_DeleteDomain
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              domain:
-                type: string
-      tags:
-        - Msg
-  /opkit.domain.Msg/SetPrimaryDomain:
-    post:
-      operationId: OpkitDomainMsg_SetPrimaryDomain
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              domain:
-                type: string
-      tags:
-        - Msg
-  /opkit.domain.Msg/UpdateDomain:
-    post:
-      operationId: OpkitDomainMsg_UpdateDomain
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              creator:
-                type: string
-              id:
-                type: string
-                format: uint64
-              domain:
-                type: string
-              owner:
-                type: string
-              timestamp:
-                type: string
-              txhash:
-                type: string
-      tags:
-        - Msg
-  /opkit.domain.Msg/UpdateParams:
-    post:
-      summary: |-
-        UpdateParams defines a (governance) operation for updating the module
-        parameters. The authority defaults to the x/gov module account.
-      operationId: OpkitDomainMsg_UpdateParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            description: >-
-              MsgUpdateParamsResponse defines the response structure for
-              executing a
-
-              MsgUpdateParams message.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: body
-          description: MsgUpdateParams is the Msg/UpdateParams request type.
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              authority:
-                type: string
-                description: >-
-                  authority is the address that controls the module (defaults to
-                  x/gov unless overwritten).
-              params:
-                description: 'NOTE: All parameters must be supplied.'
-                type: object
-            description: MsgUpdateParams is the Msg/UpdateParams request type.
-      tags:
-        - Msg
   /opkit/domain/check_owner/{address}:
     get:
       summary: Queries a list of CheckOwner items.
@@ -16933,6 +16705,273 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /opkit.domain.Msg/ClaimReward:
+    post:
+      operationId: OpkitDomainMsg_ClaimReward
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              domain:
+                type: string
+      tags:
+        - Msg
+  /opkit.domain.Msg/CreateDomain:
+    post:
+      operationId: OpkitDomainMsg_CreateDomain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              domain:
+                type: string
+              owner:
+                type: string
+              timestamp:
+                type: string
+              txhash:
+                type: string
+      tags:
+        - Msg
+  /opkit.domain.Msg/DeleteDomain:
+    post:
+      operationId: OpkitDomainMsg_DeleteDomain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              domain:
+                type: string
+      tags:
+        - Msg
+  /opkit.domain.Msg/SetPrimaryDomain:
+    post:
+      operationId: OpkitDomainMsg_SetPrimaryDomain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              domain:
+                type: string
+      tags:
+        - Msg
+  /opkit.domain.Msg/UpdateDomain:
+    post:
+      operationId: OpkitDomainMsg_UpdateDomain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+              domain:
+                type: string
+              owner:
+                type: string
+              timestamp:
+                type: string
+              txhash:
+                type: string
+      tags:
+        - Msg
+  /opkit.domain.Msg/UpdateParams:
+    post:
+      summary: |-
+        UpdateParams defines a (governance) operation for updating the module
+        parameters. The authority defaults to the x/gov module account.
+      operationId: OpkitDomainMsg_UpdateParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            description: >-
+              MsgUpdateParamsResponse defines the response structure for
+              executing a
+
+              MsgUpdateParams message.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          description: MsgUpdateParams is the Msg/UpdateParams request type.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              authority:
+                type: string
+                description: >-
+                  authority is the address that controls the module (defaults to
+                  x/gov unless overwritten).
+              params:
+                description: 'NOTE: All parameters must be supplied.'
+                type: object
+            description: MsgUpdateParams is the Msg/UpdateParams request type.
+      tags:
+        - Msg
 definitions:
   cosmos.auth.v1beta1.MsgUpdateParams:
     type: object
@@ -23585,81 +23624,6 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
-  opkit.domain.MsgCreateDomain:
-    type: object
-    properties:
-      creator:
-        type: string
-      domain:
-        type: string
-      owner:
-        type: string
-      timestamp:
-        type: string
-      txhash:
-        type: string
-  opkit.domain.MsgCreateDomainResponse:
-    type: object
-    properties:
-      id:
-        type: string
-        format: uint64
-  opkit.domain.MsgDeleteDomain:
-    type: object
-    properties:
-      creator:
-        type: string
-      domain:
-        type: string
-  opkit.domain.MsgDeleteDomainResponse:
-    type: object
-  opkit.domain.MsgSetPrimaryDomain:
-    type: object
-    properties:
-      creator:
-        type: string
-      domain:
-        type: string
-  opkit.domain.MsgSetPrimaryDomainResponse:
-    type: object
-  opkit.domain.MsgUpdateDomain:
-    type: object
-    properties:
-      creator:
-        type: string
-      id:
-        type: string
-        format: uint64
-      domain:
-        type: string
-      owner:
-        type: string
-      timestamp:
-        type: string
-      txhash:
-        type: string
-  opkit.domain.MsgUpdateDomainResponse:
-    type: object
-  opkit.domain.MsgUpdateParams:
-    type: object
-    properties:
-      authority:
-        type: string
-        description: >-
-          authority is the address that controls the module (defaults to x/gov
-          unless overwritten).
-      params:
-        description: 'NOTE: All parameters must be supplied.'
-        type: object
-    description: MsgUpdateParams is the Msg/UpdateParams request type.
-  opkit.domain.MsgUpdateParamsResponse:
-    type: object
-    description: |-
-      MsgUpdateParamsResponse defines the response structure for executing a
-      MsgUpdateParams message.
-  opkit.domain.Params:
-    type: object
-    description: Params defines the parameters for the module.
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -23753,6 +23717,9 @@ definitions:
         type: string
       creator:
         type: string
+  opkit.domain.Params:
+    type: object
+    description: Params defines the parameters for the module.
   opkit.domain.QueryAllDomainResponse:
     type: object
     properties:
@@ -23929,3 +23896,84 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  opkit.domain.MsgClaimReward:
+    type: object
+    properties:
+      creator:
+        type: string
+      domain:
+        type: string
+  opkit.domain.MsgClaimRewardResponse:
+    type: object
+  opkit.domain.MsgCreateDomain:
+    type: object
+    properties:
+      creator:
+        type: string
+      domain:
+        type: string
+      owner:
+        type: string
+      timestamp:
+        type: string
+      txhash:
+        type: string
+  opkit.domain.MsgCreateDomainResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  opkit.domain.MsgDeleteDomain:
+    type: object
+    properties:
+      creator:
+        type: string
+      domain:
+        type: string
+  opkit.domain.MsgDeleteDomainResponse:
+    type: object
+  opkit.domain.MsgSetPrimaryDomain:
+    type: object
+    properties:
+      creator:
+        type: string
+      domain:
+        type: string
+  opkit.domain.MsgSetPrimaryDomainResponse:
+    type: object
+  opkit.domain.MsgUpdateDomain:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      domain:
+        type: string
+      owner:
+        type: string
+      timestamp:
+        type: string
+      txhash:
+        type: string
+  opkit.domain.MsgUpdateDomainResponse:
+    type: object
+  opkit.domain.MsgUpdateParams:
+    type: object
+    properties:
+      authority:
+        type: string
+        description: >-
+          authority is the address that controls the module (defaults to x/gov
+          unless overwritten).
+      params:
+        description: 'NOTE: All parameters must be supplied.'
+        type: object
+    description: MsgUpdateParams is the Msg/UpdateParams request type.
+  opkit.domain.MsgUpdateParamsResponse:
+    type: object
+    description: |-
+      MsgUpdateParamsResponse defines the response structure for executing a
+      MsgUpdateParams message.

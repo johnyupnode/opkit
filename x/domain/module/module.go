@@ -203,6 +203,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		in.Logger,
 		authority.String(),
 		in.BankKeeper,
+		in.AccountKeeper,
 	)
 	m := NewAppModule(
 		in.Cdc,

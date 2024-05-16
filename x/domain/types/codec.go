@@ -16,6 +16,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgSetPrimaryDomain{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgClaimReward{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),
