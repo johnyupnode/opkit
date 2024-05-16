@@ -3,6 +3,7 @@ package keeper
 import (
 	"cosmossdk.io/math"
 	"fmt"
+	"opkit/indexer"
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
@@ -24,6 +25,7 @@ type (
 
 		bankKeeper    types.BankKeeper
 		accountKeeper types.AccountKeeper
+		indexerApi    indexer.Api
 	}
 )
 
@@ -35,6 +37,7 @@ func NewKeeper(
 
 	bankKeeper types.BankKeeper,
 	accountKeeper types.AccountKeeper,
+	indexerApi indexer.Api,
 ) Keeper {
 	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address: %s", authority))
@@ -48,6 +51,7 @@ func NewKeeper(
 
 		bankKeeper:    bankKeeper,
 		accountKeeper: accountKeeper,
+		indexerApi:    indexerApi,
 	}
 }
 
@@ -63,22 +67,13 @@ func (k Keeper) Logger() log.Logger {
 
 // GetDomainsFromIndexer from indexer
 func (k Keeper) GetDomainsFromIndexer(ctx sdk.Context, key, value string) ([]types.Domain, error) {
-	return []types.Domain{
-		{
-			Id:        1,
-			Domain:    "domain1",
-			Owner:     "owner1",
-			Timestamp: ctx.BlockTime().UTC().String(),
-			Txhash:    "txhash1",
-		},
-		{
-			Id:        2,
-			Domain:    "domain2",
-			Owner:     "owner2",
-			Timestamp: ctx.BlockTime().UTC().String(),
-			Txhash:    "txhash2",
-		},
-	}, nil
+	domains, err := k.indexerApi.GetDomainStringRecord(ctx, key, value)
+	if err != nil {
+		k.logger.Error("failed to get domains from indexer", "error", err)
+		return nil, err
+	}
+
+	return k.convertDomains(domains), nil
 }
 
 // SetPrimaryDomain sets the primary domain.
@@ -115,13 +110,13 @@ func (k Keeper) SetPrimaryDomain(ctx sdk.Context, domain string, sender string) 
 
 // GetDomainInfoFromIndexer returns a domain from the indexer.
 func (k Keeper) GetDomainInfoFromIndexer(ctx sdk.Context, domain string) (types.Domain, error) {
-	return types.Domain{
-		Id:        1,
-		Domain:    "domainIndexer",
-		Owner:     "owner1",
-		Timestamp: ctx.BlockTime().UTC().String(),
-		Txhash:    "txhash1",
-	}, nil
+	d, err := k.indexerApi.GetDomainInfo(ctx, domain)
+	if err != nil {
+		k.logger.Error("failed to get domain from indexer", "error", err)
+		return types.Domain{}, err
+	}
+
+	return k.convertDomain(d), nil
 }
 
 // ClaimReward claims the reward for the domain.
@@ -183,4 +178,23 @@ func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error
 	k.logger.Info("reward claimed", "domain", domain, "sender", sender, "amount", amountClaim.String())
 
 	return nil
+}
+
+func (k Keeper) convertDomains(domains []indexer.DomainIndexer) []types.Domain {
+	domainsConverted := make([]types.Domain, 0, len(domains))
+	for _, d := range domains {
+		domainsConverted = append(domainsConverted, types.Domain{
+			Domain: d.Domain,
+			Owner:  d.Owner,
+		})
+	}
+
+	return domainsConverted
+}
+
+func (k Keeper) convertDomain(domain indexer.DomainIndexer) types.Domain {
+	return types.Domain{
+		Domain: domain.Domain,
+		Owner:  domain.Owner,
+	}
 }

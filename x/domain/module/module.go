@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"opkit/indexer"
 
 	"cosmossdk.io/core/appmodule"
 	"cosmossdk.io/core/store"
@@ -191,6 +192,10 @@ type ModuleOutputs struct {
 	Module       appmodule.AppModule
 }
 
+// BaseUrl is the default base url for the indexer
+// TODO: move this to a config file
+const BaseUrl = "https://opkit-indexer.opti.domains"
+
 func ProvideModule(in ModuleInputs) ModuleOutputs {
 	// default to governance authority if not provided
 	authority := authtypes.NewModuleAddress(govtypes.ModuleName)
@@ -204,6 +209,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		authority.String(),
 		in.BankKeeper,
 		in.AccountKeeper,
+		indexer.NewApiHandle(BaseUrl, in.Logger),
 	)
 	m := NewAppModule(
 		in.Cdc,
