@@ -123,9 +123,9 @@ func (k Keeper) GetDomainInfoFromIndexer(ctx sdk.Context, domain string) (types.
 func (k Keeper) ClaimReward(ctx sdk.Context, domain string, sender string) error {
 	// Get the reward
 	reward, found := k.GetReward(ctx, domain)
-	if !found {
-		k.logger.Error("reward not found", "domain", domain)
-		return fmt.Errorf("reward not found: %s", domain)
+	if found {
+		k.logger.Error("reward already claimed", "domain", domain)
+		return fmt.Errorf("reward already claimed: %s", domain)
 	}
 	if reward.IsClaim {
 		k.logger.Error("reward already claimed", "domain", domain)

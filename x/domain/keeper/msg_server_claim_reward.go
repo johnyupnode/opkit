@@ -11,8 +11,9 @@ import (
 func (k msgServer) ClaimReward(goCtx context.Context, msg *types.MsgClaimReward) (*types.MsgClaimRewardResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	if err := k.Keeper.ClaimReward(ctx, msg.Domain, msg.Creator); err != nil {
+		return nil, err
+	}
 
 	return &types.MsgClaimRewardResponse{}, nil
 }
