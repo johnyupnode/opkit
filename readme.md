@@ -44,6 +44,12 @@ curl https://get.ignite.com/username/opkit@latest! | sudo bash
 
 ## How to use
 
+### Prerequisite
+
+The domain module need to be funded with stake token to be able to distribute the domain minting reward
+
+Domain module: opkit17tlc8ps2fhpq8xyw6x3zhg0jzgmlqj4a7xeflh
+
 ### CLI
 
 The blockchain node binary can be used to interact with the blockchain. To see the available commands, run:
