@@ -42,6 +42,120 @@ curl https://get.ignite.com/username/opkit@latest! | sudo bash
 ```
 `username/opkit` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
 
+## How to use
+
+### CLI
+
+The blockchain node binary can be used to interact with the blockchain. To see the available commands, run:
+
+#### List all domain by opkit address
+```shell
+opkitd query domain list-domain-opkit <opkit_address>
+```
+Example:
+```shell
+opkitd query domain list-domain-opkit opkit1t85skec9sf386946y8g820auhpxw8z7csky8j5
+
+Domain:
+- domain: johny.opkit
+  owner: 0xc4C565bdF45F54cca35036347F8BC1974c800372
+  string_records:
+  - key: opkit
+    value: opkit1t85skec9sf386946y8g820auhpxw8z7csky8j5
+```
+
+#### List all domain by evm address
+```shell
+opkitd query domain list-domain-evm <owner_address>
+```
+Example:
+```shell
+opkitd query domain list-domain-evm 0xc4C565bdF45F54cca35036347F8BC1974c800372
+
+Domain:
+- domain: test2.opkit
+  owner: 0xc4C565bdF45F54cca35036347F8BC1974c800372
+  string_records:
+  - key: github
+    value: EZ420
+  - key: opkit
+    value: opkit13ng4lj30e6ptpv8gm5rf2dqqyzxkm5tskvtmal
+- domain: johny.opkit
+  owner: 0xc4C565bdF45F54cca35036347F8BC1974c800372
+  string_records:
+  - key: opkit
+    value: opkit1t85skec9sf386946y8g820auhpxw8z7csky8j5
+```
+
+#### List all domain by key and value of string record
+```shell
+opkitd query domain list-domain-by-string <key> <value>
+```
+Example:
+```shell
+opkitd query domain list-domain-by-string github EZ420
+
+Domain:
+- domain: test2.opkit
+  owner: 0xc4C565bdF45F54cca35036347F8BC1974c800372
+  string_records:
+  - key: github
+    value: EZ420
+  - key: opkit
+    value: opkit13ng4lj30e6ptpv8gm5rf2dqqyzxkm5tskvtmal
+```
+
+#### Set primary domain
+```shell
+opkitd tx domain set-primary-domain <domain> --from opkit-key --fees 5000stake
+```
+Example:
+```shell
+opkitd tx domain set-primary-domain test2.opkit --from opkit-key --fees 5000stake
+```
+
+#### Get primary domain
+```shell
+opkitd query domain get-primary-domain <domain>
+```
+Example:
+```shell
+opkitd query domain get-primary-domain johny.opkit
+
+Domain:
+- domain: johny.opkit
+  owner: 0xc4C565bdF45F54cca35036347F8BC1974c800372
+  string_records:
+  - key: opkit
+    value: opkit1t85skec9sf386946y8g820auhpxw8z7csky8j5
+```
+
+#### Claim reward for domain
+```shell
+opkitd tx domain claim-reward <domain> --from opkit-key --fees 5000stake
+```
+Example:
+```shell
+opkitd tx domain claim-reward johny.opkit --from opkit-key --fees 5000stake
+```
+
+#### Query reward for domain
+```shell
+opkitd query domain reward <domain>
+```
+Example:
+```shell
+opkitd query domain reward johny.opkit 
+
+Reward:
+  amount:
+    amount: "100000000"
+    denom: stake
+  domain: johny.opkit
+  is_claimed: false
+```
+
+
 ## Learn more
 
 - [Ignite CLI](https://ignite.com/cli)
